@@ -29,5 +29,5 @@ urlpatterns = [
     url(r'^restaurant/(?P<pk>\d+)/$', RestaurantIndex.as_view(), name='restaurant_index'),
     url(r'^customer/(?P<pk>\d+)/$', CustomerIndex.as_view(), name='customer_index'),
     url(r'^welcome/', WelcomeView.as_view(), name='welcome'),
-    url('^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
