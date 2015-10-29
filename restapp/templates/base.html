@@ -37,7 +37,7 @@
                  <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
               {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="#">Create User</a></li>
+                <li><a href="{% url 'create_user' %}">Create User</a></li>
               {% endif %}
               </ul>
             </li>
