@@ -87,10 +87,14 @@ class CustomerIndex(TemplateView):
         context['object'] = User.objects.filter(id=kwargs["pk"])[0]
         return context
 
-class OrderView(View):
+
+class CustomerOrderView(ListView):
     model = Order
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(user__id=user_id)
 
 
 class CreateItemView(CreateView):
     model = Item
-
