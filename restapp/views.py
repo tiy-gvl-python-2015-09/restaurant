@@ -22,12 +22,8 @@ class IndexView(View):
     def get(self, request):
         if request.user.id == None:
             return HttpResponseRedirect(reverse("welcome"))
-        elif request.user.profile.user_type == "restaurant":
-            return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
-        elif request.user.profile.user_type == "customer":
-            return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
         else:
-            return HttpResponseRedirect(reverse("welcome"))
+            return HttpResponseRedirect(reverse("user_redirect"))
 
 
 class WelcomeView(TemplateView):
@@ -49,7 +45,7 @@ class ProfileUpdate(UpdateView):
 
 class RestaurantUpdate(UpdateView):
     model = Profile
-    fields = ["name", "address", "phone_number", "cuisine"]
+    fields = ["name", "address", "phone_num", "cuisine"]
     success_url = "/"
 
 
