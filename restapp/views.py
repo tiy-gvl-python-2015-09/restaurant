@@ -51,6 +51,12 @@ class RestaurantUpdate(UpdateView):
     success_url = "/"
 
 
+class CustomerUpdate(UpdateView):
+    model = Profile
+    fields = ["name", "address", "phone_number", "allergies"]
+    pass
+
+
 class UserRedirectView(View):
 
     def get(self, request):
