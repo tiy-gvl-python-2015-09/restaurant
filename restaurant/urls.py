@@ -20,7 +20,7 @@ from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, U
     CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate
 
 urlpatterns = [
-    url(r'^restaurant', RestaurantsList.as_view(), name='restaurant_list'),
+    url(r'^restaurant/$', RestaurantsList.as_view(), name='restaurant_list'),
     url(r'^menu/(?P<user_id>\d+)/$', MenuList.as_view(), name='menu'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', IndexView.as_view(), name='index'),
