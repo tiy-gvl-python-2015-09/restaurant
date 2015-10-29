@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from restapp.views import RestaurantsList, MenuList
+from django.contrib.auth.decorators import login_required
+from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView
 
 urlpatterns = [
     url(r'^restaurant', RestaurantsList.as_view(), name='restaurant_list'),
     url(r'^menu/(?P<user_id>\d+)/$', MenuList.as_view(), name='menu'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^user_redirect', UserRedirectView.as_view(), name='user_redirect'),
+    url(r'^update_profile/(?P<pk>\d+)/$', login_required(ProfileUpdate.as_view()), name='update_profile'),
+    url(r'^restaurant/(?P<pk>\d+)/$', RestaurantIndex.as_view(), name='restaurant_index'),
+    url(r'^customer/(?P<pk>\d+)/$', CustomerIndex.as_view(), name='customer_index'),
 ]
