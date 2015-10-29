@@ -9,8 +9,8 @@ from django.views.generic import ListView, View, CreateView, UpdateView, Templat
 from restapp.models import Profile, Order, Item
 
 
-class RestaurantsList(ListView):
-    pass
+class RestaurantsList(TemplateView):
+    template_name = 'customer_index.html'
 
 
 class MenuList(ListView):
