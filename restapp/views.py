@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
-from restapp.models import Profile
+from restapp.models import Profile, Order
 
 
 class RestaurantsList(ListView):
@@ -86,3 +86,7 @@ class CustomerIndex(TemplateView):
         context = super(CustomerIndex, self).get_context_data(**kwargs)
         context['object'] = User.objects.filter(id=kwargs["pk"])[0]
         return context
+
+class OrderView(View):
+    model = Order
+
