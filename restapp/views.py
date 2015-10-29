@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, View
 
 
-class RestaurauntList(ListView):
+class RestaurantsList(ListView):
     pass
 
 

@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from restapp.views import RestaurantsList, MenuList
 
 urlpatterns = [
+    url(r'^restaurant', RestaurantsList.as_view(), name='restaurant_list'),
+    url(r'^menu/(?P<user_id>\d+)/$', MenuList.as_view(), name='menu'),
     url(r'^admin/', include(admin.site.urls)),
 ]
