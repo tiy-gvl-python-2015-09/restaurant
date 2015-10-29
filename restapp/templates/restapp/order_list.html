@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     {% for item in object_list %}
-        <h1>Name: {{ item.user }}</h1><br><br>
+        <h1>{{ item.user }}</h1><br><br>
         {% for food in item.items.all %}
         <li>{{ food }}</li><br><br>
+            {% endfor %}
+        {% for prices in item.items.all %}
+            {{ prices }}
             {% endfor %}
         {{ item.comments }}<br><br>
     {% endfor %}

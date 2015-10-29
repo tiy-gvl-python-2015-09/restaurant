@@ -113,3 +113,12 @@ class CreateItemView(CreateView):
         model = form.save(commit=False)
         model.owner = self.request.user
         return super().form_valid(form)
+
+
+class RestaurantOrderView(ListView):
+    model = Order
+    template_name = 'restapp/rest_order_list.html'
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(user__id=user_id)

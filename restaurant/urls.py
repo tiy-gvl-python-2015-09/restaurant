@@ -17,7 +17,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView, RestaurantIndex,\
-    CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate
+    CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate, \
+    RestaurantOrderView
 
 urlpatterns = [
     url(r'^restaurant/$', RestaurantsList.as_view(), name='restaurant_list'),
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^user_redirect', UserRedirectView.as_view(), name='user_redirect'),
     url(r'^update_profile/(?P<pk>\d+)/$', login_required(ProfileUpdate.as_view()), name='update_profile'),
     url(r'^restaurant/(?P<pk>\d+)/$', RestaurantIndex.as_view(), name='restaurant_index'),
+    url(r'^restaurant/order/(?P<pk>\d+)/$', RestaurantOrderView.as_view(), name='restaurant_order_view'),
     url(r'^customer/(?P<pk>\d+)/$', CustomerIndex.as_view(), name='customer_index'),
     url(r'^customer/order/(?P<pk>\d+)/$', CustomerOrderView.as_view(), name='customer_order_view'),
     url(r'^welcome/', WelcomeView.as_view(), name='welcome'),
