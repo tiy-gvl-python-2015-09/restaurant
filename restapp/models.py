@@ -12,9 +12,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=200, blank=True)
     address = models.CharField(max_length=200, blank=True)
     phone_num = models.CharField(max_length=25, blank=True)
-    cuisine = models.IntegerField(choices=[(1, "American"), (2, "Italian"), (3, "Japanese"), (4, "Other")])
+    cuisine = models.IntegerField(choices=[(0, ""), (1, "American"), (2, "Italian"), (3, "Japanese"), (4, "Other")], null=True, blank=True)
     allergies = models.TextField(blank=True)
-    user_type = models.CharField(max_length=20, choices=[("restaurant", "Restaurant"), ("customer", "Customer")], null=True)
+    user_type = models.CharField(max_length=20, choices=[("restaurant", "Restaurant"), ("customer", "Customer")], null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -33,6 +33,9 @@ class Item(models.Model):
     price = models.FloatField()
     owner = models.ForeignKey(User)
 
+    def __str__(self):
+        return self.item_name
+
 
 class Order(models.Model):
     user = models.ForeignKey(User)
@@ -41,3 +44,5 @@ class Order(models.Model):
     fulfilled = models.BooleanField()
     comments = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.user
