@@ -2,31 +2,42 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.db.models import ForeignKey, CharField, FloatField
-
-
-class Item(models.Model):
-    item_name = CharField(max_length=50)
-    description = CharField(max_length=200)
-    price = FloatField()
-    owner = ForeignKey(User)
+import django.db.models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    name = ForeignKey(User)
-    address = CharField(max_length=200)
-    cuisine = CharField(max_length=15)
-    allergies = models.TextField()
-    type = models.CharField(max_length=1)
+    user = models.ForeignKey(User)
+    name = models.CharField(max_length=200, blank=True)
+    address = models.CharField(max_length=200, blank=True)
+    phone_num = models.CharField(max_length=25, blank=True)
+    cuisine = models.IntegerField(choices=[(1, "American"), (2, "Italian"), (3, "Japanese"), (4, "Other")], null=True)
+    allergies = models.TextField(blank=True)
+    user_type = models.CharField(max_length=20, choices=[("restaurant", "Restaurant"), ("customer", "Customer")], null=True)
 
     def __str__(self):
-        return self.body
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def user_post_save(sender, **kwargs):
+    instance = kwargs.get("instance")
+    created = kwargs.get("created")
+    if created:
+        Profile.objects.create(user=instance)
+
+
+class Item(models.Model):
+    item_name = models.CharField(max_length=50)
+    description = models.CharField(max_length=200, blank=True)
+    price = models.FloatField()
+    owner = models.ForeignKey(User)
 
 
 class Order(models.Model):
-    user = ForeignKey(User)
-    items = models.ManyToManyField(Item) # Should this be a get function?
-    timestamp = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User)
+    items = models.ManyToManyField(Item)
+    timestamp = models.DateTimeField(auto_now_add=True)
     fulfilled = models.BooleanField()
-    comments = models.TextField()
+    comments = models.TextField(blank=True)
 
