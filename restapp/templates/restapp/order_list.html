@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     {% for item in object_list %}
-        <h1>{{ item.user }}</h1><br><br>
-        {% for food in item.items.all %}
-        <li>{{ food }}</li><br><br>
+        <h3>{{ item.user }}</h3><br><br>
+            {% for food in item.items.all %}
+                <li><h3>{{ food }}</h3></li>
+                <li><h3>{{ food.price }}</h3></li><br><br>
             {% endfor %}
-        {% for prices in item.items.all %}
-            {{ prices }}
-            {% endfor %}
-        {{ item.comments }}<br><br>
+        <h4>{{ item.comments }}</h4><br><br>
     {% endfor %}
     </div>
 {% endblock %}
