@@ -19,7 +19,6 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-<<<<<<< Updated upstream
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'restaurant_list' %}">Restaurant List</a></li>
               {% if request.user.id %}
@@ -32,46 +31,14 @@
                     <li><a href="#">Past Orders</a></li>
                 {% endif %}
               {% endif %}
-=======
-            <li class="active"><a href="{% url 'restaurant_list' %}">Restaurant List <span class="sr-only">(current)</span></a></li>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li>
-                <li class="divider"></li>><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li  class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
->>>>>>> Stashed changes
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.user.id %}
-<<<<<<< Updated upstream
                  <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
               {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="#">Create User</a></li>
               {% endif %}
-=======
-              <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
-              {% else %}
-              <li><a href="{% url 'login' %}">Login</a></li>
-              {% endif %}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
->>>>>>> Stashed changes
               </ul>
             </li>
           </ul>

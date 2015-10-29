@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
-from restapp.models import Profile, Order
+from restapp.models import Profile, Order, Item
 
 
 class RestaurantsList(ListView):
@@ -89,4 +89,8 @@ class CustomerIndex(TemplateView):
 
 class OrderView(View):
     model = Order
+
+
+class CreateItemView(CreateView):
+    model = Item
 
