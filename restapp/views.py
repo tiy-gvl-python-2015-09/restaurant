@@ -54,17 +54,23 @@ class RestaurantUpdate(UpdateView):
 
 class CustomerUpdate(UpdateView):
     model = Profile
-    fields = ["name", "address", "phone_number", "allergies"]
-    pass
+    fields = ["name", "address", "phone_num", "allergies"]
+    success_url = '/'
 
 
 class UserRedirectView(View):
 
     def get(self, request):
         if request.user.profile.user_type == "restaurant":
-            return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
+            if request.user.profile.name == '':
+                return HttpResponseRedirect(reverse("restaurant_update", kwargs={"pk": request.user.id}))
+            else:
+                return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
         elif request.user.profile.user_type == "customer":
-            return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
+            if request.user.profile.name == '':
+                return HttpResponseRedirect(reverse("customer_update", kwargs={"pk": request.user.id}))
+            else:
+                return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
         else:
             return HttpResponseRedirect(reverse("update_profile", kwargs={"pk": request.user.id}))
 

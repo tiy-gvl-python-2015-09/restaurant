@@ -12,9 +12,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=200, blank=True)
     address = models.CharField(max_length=200, blank=True)
     phone_num = models.CharField(max_length=25, blank=True)
-    cuisine = models.IntegerField(choices=[(0, ""), (1, "American"), (2, "Italian"), (3, "Japanese"), (4, "Other")], null=True, blank=True)
+    cuisine = models.IntegerField(choices=[(1, "American"), (2, "Italian"), (3, "Japanese"), (4, "Other")], null=True)
     allergies = models.TextField(blank=True)
-    user_type = models.CharField(max_length=20, choices=[("restaurant", "Restaurant"), ("customer", "Customer")], null=True, blank=True)
+    user_type = models.CharField(max_length=20, choices=[("restaurant", "Restaurant"), ("customer", "Customer")], null=True)
 
     def __str__(self):
         return self.user.username

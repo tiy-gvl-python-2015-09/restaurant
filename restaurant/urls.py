@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
-from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView, RestaurantIndex, \
-    CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView
+from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView, RestaurantIndex,
+    CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate
 
 urlpatterns = [
     url(r'^restaurant', RestaurantsList.as_view(), name='restaurant_list'),
@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^restaurant/create_item/$', CreateItemView.as_view(), name='create_item'),
     url(r'^create_user/', UserCreate.as_view(), name='create_user'),
+    url(r'^update_restaurant/(?P<pk>\d+)/$', login_required(RestaurantUpdate.as_view()), name='restaurant_update'),
+    url(r'^update_customer/(?P<pk>\d+)/$', login_required(CustomerUpdate.as_view()), name='customer_update'),
 ]
