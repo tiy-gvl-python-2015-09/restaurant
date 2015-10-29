@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for item in object_list %}
+        <h1>{{ item.id }}</h1><br><br>
+        {% for food in item.items.all %}
+        <li>{{ food }}</li><br><br>
+            {% endfor %}
+        {{ item.comments }}<br><br>
+    {% endfor %}
+    </div>
+{% endblock %}
