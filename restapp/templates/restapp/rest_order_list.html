@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-lg-5 col-md-7 col-sm-8">
     {% for item in object_list %}
-        <h1>{{ item.id }}</h1><br><br>
+        <h2>{{ item.id }}</h2><br><br>
+        <h3>{{ item.timestamp }}</h3><br><br>
         {% for food in item.items.all %}
-        <li>{{ food }}</li><br><br>
+        <li><h1>{{ food }}</h1></li><br><br>
             {% endfor %}
-        {{ item.comments }}<br><br>
+        <h1>Comments: {{ item.comments }}</h1><br><br>
+        </div>
+        <div class="col-lg-7 col-md-5 col-sm-4">
+             <button type="button" class="super-big-button">Left</button>
+         </div>
     {% endfor %}
     </div>
 {% endblock %}
