@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <br>
-<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
       <div class="container-fluid">
 
         <div class="navbar-header">
@@ -26,12 +26,13 @@
           <ul class="nav navbar-nav">
             <li><a href="{% url 'restaurant_list' %}">Restaurant List</a></li>
             <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'create_item' %}">Create Menu Item</a></li>
             {% if request.user.id %}
                 {% if request.user.profile.user_type == 'restaurant' %}
                     <li><a href="#">Order Que</a></li>
                     <li><a href="#">Complete Orders</a></li>
                     <li><a href="{% url 'create_item' %}">Create Menu Item</a></li>
-                    {% else %}
+                    {% elif request.user.profile.user_type == 'customer' %}
                     <li><a href="#">Place Order</a></li>
                     <li><a href="#">Orders Placed</a></li>
                     <li><a href="#">Past Orders</a></li>

@@ -9,9 +9,9 @@ from django.views.generic import ListView, View, CreateView, UpdateView, Templat
 from restapp.models import Profile, Order, Item
 
 
+
 class RestaurantsList(TemplateView):
     template_name = 'customer_index.html'
-
 
 class MenuList(ListView):
     pass
@@ -26,6 +26,7 @@ class IndexView(View):
             return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
         elif request.user.profile.user_type == "customer":
             return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
+        return HttpResponseRedirect(reverse("welcome"))
 
 
 class WelcomeView(TemplateView):
@@ -66,6 +67,7 @@ class UserRedirectView(View):
             return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
         else:
             return HttpResponseRedirect(reverse("update_profile", kwargs={"pk": request.user.id}))
+
 
 
 class RestaurantIndex(TemplateView):
