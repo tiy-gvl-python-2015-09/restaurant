@@ -33,7 +33,7 @@
                     <li><a href="{% url 'create_item' %}">Create Menu Item</a></li>
                     {% elif request.user.profile.user_type == 'customer' %}
                     <li><a href="#">Place Order</a></li>
-                    <li><a href="#">Orders Placed</a></li>
+                    <li><a href="{% url 'customer_order_view' user.id%}">Orders Placed</a></li>
                     <li><a href="#">Past Orders</a></li>
                 {% endif %}
             {% endif %}
