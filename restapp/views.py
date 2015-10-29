@@ -26,7 +26,8 @@ class IndexView(View):
             return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
         elif request.user.profile.user_type == "customer":
             return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
-        return HttpResponseRedirect(reverse("welcome"))
+        else:
+            return HttpResponseRedirect(reverse("welcome"))
 
 
 class WelcomeView(TemplateView):
