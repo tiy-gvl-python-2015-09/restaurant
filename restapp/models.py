@@ -66,8 +66,8 @@ class Order(models.Model):
         item_cost = []
         order_items = self.items.all()
         for item in order_items:
-            item_cost.append(item)
-        sum(item_cost)
+            item_cost.append(item.price)
+        return sum(item_cost)
 
     def __str__(self):
         return str(self.id)
