@@ -3,3 +3,9 @@
     font-size: 2.5em;
     line-height: 10;
 }
+
+.page_header {
+    width: 100%;
+    font-size: 14;
+    line-height: 8;
+}
