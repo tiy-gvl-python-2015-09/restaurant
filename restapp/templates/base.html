@@ -30,7 +30,7 @@
             {% if request.user.id %}
                 {% if request.user.profile.user_type == 'restaurant' %}
                     <li><a href="{% url 'restaurant_order_view' user.id %}">Order Que</a></li>
-                    <li><a href="#">Complete Orders</a></li>
+                    <li><a href="{% url 'comp_order_view' user.id %}">Complete Orders</a></li>
                     {% elif request.user.profile.user_type == 'customer' %}
                     <li><a href="{% url 'restaurant_list' %}">Restaurant List</a></li>
                     <li><a href="#">Place Order</a></li>

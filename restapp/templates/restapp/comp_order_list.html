@@ -3,23 +3,20 @@
 {% block content %}
     {% for item in object_list %}
         {% if item.submitted == True %}
-            {% if item.fulfilled == False %}
+            {% if item.fulfilled == True %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><h2>{{ item.id }}</h2></h3></div>
                     <div class="panel-body">
-                        <div class="col-lg-5 col-md-7 col-sm-8">
-                            <h3>{{ item.timestamp }}</h3><br><br>
+                        <h3>Name: {{ item.customer.profile.name }}</h3>
+                        <h3>Phone Number: {{ item.customer.profile.phone_num }}</h3>
+                        <h3>{{ item.timestamp }}</h3><br><br>
                             {% for food in item.items.all %}
                                 <h1><li>{{ food }}</li></h1><br><br>
                             {% endfor %}
                             <h1>Comments: {{ item.comments }}</h1><br><br>
                         </div>
                             <div class="col-lg-7 col-md-5 col-sm-4">
-                                <form action="" method="post"></form>
-                                    {% csrf_token %}
-                                        <input type="submit" value="Order finished" class="super-big-button"/>
-                                </form>
                              </div>
                         </div>
                 </div>

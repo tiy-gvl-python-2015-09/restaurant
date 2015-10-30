@@ -121,6 +121,15 @@ class RestaurantOrderView(ListView):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(restaurant__id=user_id)
 
+
+class CompOrderView(ListView):
+    model = Order
+    template_name = 'restapp/comp_order_list.html'
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(restaurant__id=user_id)
+
 class ItemListView(ListView):
     model = Item
 
