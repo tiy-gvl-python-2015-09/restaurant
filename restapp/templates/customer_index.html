@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
+    Restaurants
 {% endblock %}
 
 {% block content %}
-    <h1>Order from any of these fine restaurants!</h1>
-    <ls>Ichiban</ls>
-    <ls>Bob's Burgers</ls>
-    <ls>Chocolate Shop</ls>
+    <div class="container">
+        <div class="row">
+            <div class="col-m-12" style="background: #222222;color: #9d9d9d;border: 3px #222222">
+                <h3>Order from any of these fine restaurants!</h3>
+            </div>
+        </div>
+    </div>
+    <div class="list-group">
+        <ul>
+            <li>Ichiban</li>
+            <li>Bob's Burgers</li>
+            <li>Chocolate Shop</li>
+            <li>Galaxy Diner</li>
+        </ul>
+    </div>
 
 {% endblock %}
