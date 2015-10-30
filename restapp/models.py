@@ -54,11 +54,17 @@ class Item(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User)
+    customer = models.ForeignKey(User, related_name='customer')
+    restaurant = models.ForeignKey(User, related_name='restaurant')
     items = models.ManyToManyField(Item)
     timestamp = models.DateTimeField(auto_now_add=True)
     fulfilled = models.BooleanField()
     comments = models.TextField(blank=True)
+
+    @property
+    def order_cost(self):
+        items = self.items.objects.all
+        return sum([items.price_set for object in Item.objects.filter(fk_field=self.id)])
 
     def __str__(self):
         return str(self.id)
