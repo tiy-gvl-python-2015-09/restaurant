@@ -45,7 +45,7 @@ def user_post_save(sender, **kwargs):
 
 class Item(models.Model):
     item_name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200, blank=True)
+    description = models.TextField()
     price = models.FloatField()
     owner = models.ForeignKey(User)
 
