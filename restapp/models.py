@@ -60,6 +60,7 @@ class Order(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     fulfilled = models.BooleanField()
     comments = models.TextField(blank=True)
+    submitted = models.BooleanField()
 
     @property
     def order_cost(self):
