@@ -1,35 +1,34 @@
 {% extends 'base.html' %}
 
 {% block title %}
+        My Menu | {{ request.user.profile.name }}
 {% endblock %}
 
 {% block content %}
-    <h1>Menu View</h1>
+    <h1>My Menu</h1>
 
-<div class="row">
-    <div class="col-xs-12">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                My Menu
-            </div>
-            <div class="panel-body">
-                <div class="panel panel-primary">
-                    {% for object in object_list %}
-                        <div class="panel-heading">
-                            {{ object.item_name }}
-                        </div>
-                        <div class="panel-body">
-                            <ul>
-                                <li>{{ object.description }}</li>
-                                <li>${{ object.price }}</li>
-                            </ul>
-                        </div>
-                    {% endfor %}
-
-
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    {{ request.user.profile.name }} Menu
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-primary">
+                        {% for object in object_list %}
+                            <div class="panel-heading">
+                                {{ object.item_name }}
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <li>{{ object.description }}</li>
+                                    <li>${{ object.price }}</li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
