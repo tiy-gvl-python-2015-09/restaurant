@@ -14,16 +14,15 @@
                     {{ request.user.profile.name }} Menu
                 </div>
                 <div class="panel-body">
-                    {% for object in object_list %}
                     <div class="panel panel-primary">
-
-                            <div class="panel-heading">
+                        {% for object in object_list %}
+                             <div class="panel-heading">
                                 {{ object.item_name }}
                             </div>
                             <div class="panel-body">
                                 <ul>
                                     <li>{{ object.description }}</li>
-                                    <li>${{ object.price }}</li>
+                                    <li>${{ object.price| floatformat:2 }}</li>
                                 </ul>
                             </div>
                         {% endfor %}
