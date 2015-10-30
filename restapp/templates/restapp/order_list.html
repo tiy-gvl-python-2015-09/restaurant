@@ -11,7 +11,7 @@
                 <li><h3>$ {{ food.price | floatformat:2 }}</h3></li><br><br>
             {% endfor %}
         <h3>Total cost:</h3>
-        <h4>$ {{ item.order_cost }}</h4>
+        <h4>$ {{ item.order_cost | floatformat:2  }}</h4>
         <h4>{{ item.comments }}</h4><br><br>
     {% endfor %}
 {% endblock %}
