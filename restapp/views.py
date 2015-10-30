@@ -104,7 +104,7 @@ class CustomerOrderView(ListView):
 class CreateItemView(CreateView):
     model = Item
     fields = ['item_name', 'description', 'price']
-    success_url = 'welcome/'
+    success_url = '/'
 
     def form_valid(self, form):
         model = form.save(commit=False)
