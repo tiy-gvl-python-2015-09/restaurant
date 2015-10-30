@@ -119,7 +119,7 @@ class RestaurantOrderView(ListView):
 
     def get_queryset(self):
         user_id = self.kwargs.get("pk")
-        return self.model.objects.filter(customer__id=user_id)
+        return self.model.objects.filter(restaurant__id=user_id)
 
 class ItemListView(ListView):
     model = Item
@@ -127,11 +127,3 @@ class ItemListView(ListView):
     def get_queryset(self):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(owner__id=user_id)
-
-class OrderViewList(ListView):
-    model = Order
-    template_name = 'restapp/in_order_list.html'
-
-    def get_queryset(self):
-        user_id = self.kwargs.get("pk")
-        return self.model.objects.filter(restaurant__id=user_id)
