@@ -14,8 +14,9 @@
                     {{ request.user.profile.name }} Menu
                 </div>
                 <div class="panel-body">
+                    {% for object in object_list %}
                     <div class="panel panel-primary">
-                        {% for object in object_list %}
+
                             <div class="panel-heading">
                                 {{ object.item_name }}
                             </div>
