@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}
-        My Menu | {{ request.user.profile.name }}
+
+        {% with object_list|first as first_object %}
+            {% if user.profile.user_type == 'restaurant' %}
+            My Menu | {{ first_object.owner.profile.name }}
+
+        {% else %}
+
+            Menu | {{ first_object.owner.profile.name }}
+    {% endif %}
+    {% endwith %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +20,9 @@
         <div class="col-xs-12">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    {{ request.user.profile.name }} Menu
+                    {% with object_list|first as first_object %}
+                    {{ first_object.owner.profile.name }} Menu
+                    {% endwith %}
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
