@@ -28,9 +28,10 @@
               <li><a href="{% url 'restaurant_list' %}">Restaurant List</a></li>
             {% if request.user.id %}
                 {% if request.user.profile.user_type == 'restaurant' %}
-                    <li><a href="#">Order Que</a></li>
+                    <li><a href="{% url 'restaurant_order_view' user.id %}">Order Que</a></li>
                     <li><a href="#">Complete Orders</a></li>
                     <li><a href="{% url 'create_item' %}">Create Menu Item</a></li>
+                    <li><a href="{% url 'menu_view' user.id %}">View Menu</a></li>
                     {% elif request.user.profile.user_type == 'customer' %}
                     <li><a href="#">Place Order</a></li>
                     <li><a href="{% url 'customer_order_view' user.id%}">Orders Placed</a></li>
