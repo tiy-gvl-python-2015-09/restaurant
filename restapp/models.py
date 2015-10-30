@@ -20,7 +20,7 @@ class ProfileManager(models.Manager):
 
 
 class Profile(models.Model):
-    user_id = models.OneToOneField(User)
+    user = models.OneToOneField(User)
     name = models.CharField(max_length=200, blank=True)
     address = models.CharField(max_length=200, blank=True)
     phone_num = models.CharField(max_length=25, blank=True)
@@ -32,7 +32,7 @@ class Profile(models.Model):
     objects = ProfileManager()
 
     def __str__(self):
-        return self.user_id.username
+        return self.user.username
 
 
 @receiver(post_save, sender=User)
