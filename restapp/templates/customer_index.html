@@ -12,13 +12,25 @@
             </div>
         </div>
     </div>
-    <div class="list-group">
-        <ul>
-            <li>Ichiban</li>
-            <li>Bob's Burgers</li>
-            <li>Chocolate Shop</li>
-            <li>Galaxy Diner</li>
-        </ul>
+    <div class="row">
+        <div class="col-s-12">
+            <div class="panel panel-success">
+                {% for object in object_list %}
+                    {% if object.user_type == 'restaurant' %}
+                        <div class="panel-heading">
+                            <a href="{% url 'menu_view' object.id %}">
+                                {{ object.name }}
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>${{ object.cuisine }}</li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
-
 {% endblock %}
+

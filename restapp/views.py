@@ -6,12 +6,13 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
-from restapp.models import Profile, Order, Item
+from restapp.models import Profile, Order, Item, ProfileManager
 
 
+class RestaurantsList(ListView):
+    model = Profile
+    template_name = "customer_index.html"
 
-class RestaurantsList(TemplateView):
-    template_name = 'customer_index.html'
 
 class MenuList(ListView):
     pass
