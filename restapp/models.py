@@ -63,8 +63,11 @@ class Order(models.Model):
 
     @property
     def order_cost(self):
-        items = self.items.objects.all
-        return sum([items.price_set for object in Item.objects.filter(fk_field=self.id)])
+        item_cost = []
+        order_items = self.items.all()
+        for item in order_items:
+            item_cost.append(item)
+        sum(item_cost)
 
     def __str__(self):
         return str(self.id)
