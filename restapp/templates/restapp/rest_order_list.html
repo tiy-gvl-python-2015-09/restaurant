@@ -16,8 +16,7 @@
                             <h1>Comments: {{ item.comments }}</h1><br><br>
                         </div>
                             <div class="col-lg-7 col-md-5 col-sm-4">
-                                <form action="" method="post"></form>
-                                    {% csrf_token %}
+                                <form action="comp_order_list.html" method="post", role="radio"></form>
                                         <input type="submit" value="Order finished" class="super-big-button"/>
                                 </form>
                              </div>
