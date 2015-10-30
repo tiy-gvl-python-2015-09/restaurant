@@ -4,7 +4,7 @@
         <h3>{{ item.user }}</h3><br><br>
             {% for food in item.items.all %}
                 <li><h3>{{ food }}</h3></li>
-                <li><h3>{{ food.price }}</h3></li><br><br>
+                <li><h3>${{ food.price | floatformat:2 }}</h3></li><br><br>
             {% endfor %}
         <h4>{{ item.comments }}</h4><br><br>
     {% endfor %}
