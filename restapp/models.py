@@ -60,7 +60,7 @@ class Item(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(User, related_name='customer')
     restaurant = models.ForeignKey(User, related_name='restaurant')
-    items = models.ManyToManyField(Item)
+    items = models.ManyToManyField(Item, through='ItemCounter')
     timestamp = models.DateTimeField(auto_now_add=True)
     fulfilled = models.BooleanField()
     comments = models.TextField(blank=True)

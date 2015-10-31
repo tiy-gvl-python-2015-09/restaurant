@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Item',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('item_name', models.CharField(max_length=50)),
                 ('description', models.TextField()),
                 ('price', models.FloatField()),
@@ -23,27 +23,42 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='ItemCounter',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('count', models.IntegerField()),
+                ('item', models.ForeignKey(to='restapp.Item')),
+            ],
+        ),
+        migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('fulfilled', models.BooleanField()),
                 ('comments', models.TextField(blank=True)),
-                ('items', models.ManyToManyField(to='restapp.Item')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('submitted', models.BooleanField()),
+                ('customer', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='customer')),
+                ('items', models.ManyToManyField(to='restapp.Item', through='restapp.ItemCounter')),
+                ('restaurant', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='restaurant')),
             ],
         ),
         migrations.CreateModel(
             name='Profile',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('name', models.CharField(max_length=200, blank=True)),
-                ('address', models.CharField(max_length=200, blank=True)),
-                ('phone_num', models.CharField(max_length=25, blank=True)),
-                ('cuisine', models.IntegerField(choices=[(1, 'American'), (2, 'Italian'), (3, 'Japanese'), (4, 'Other')], null=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('name', models.CharField(blank=True, max_length=200)),
+                ('address', models.CharField(blank=True, max_length=200)),
+                ('phone_num', models.CharField(blank=True, max_length=25)),
+                ('cuisine', models.IntegerField(null=True, choices=[(1, 'American'), (2, 'Italian'), (3, 'Japanese'), (4, 'Other')])),
                 ('allergies', models.TextField(blank=True)),
-                ('user_type', models.CharField(choices=[('restaurant', 'Restaurant'), ('customer', 'Customer')], max_length=20, null=True)),
+                ('user_type', models.CharField(max_length=20, null=True, choices=[('restaurant', 'Restaurant'), ('customer', 'Customer')])),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
+        ),
+        migrations.AddField(
+            model_name='itemcounter',
+            name='order',
+            field=models.ForeignKey(to='restapp.Order'),
         ),
     ]
