@@ -2,7 +2,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
@@ -137,8 +136,18 @@ class ItemListView(ListView):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(owner__id=user_id)
 
+
 class ItemUpdateView(UpdateView):
     model = Item
     fields = ['item_name', 'description', 'price']
     success_url = '/'
 
+
+class RemoveOrderView(ListView):
+    template_name = 'restapp/rest_order_list.html'
+
+    def change_status(self, request, resturant_id):
+        order = Order.objects.get(id=resturant_id)
+        order.fulfilled = not order.fulfilled
+        order.save()
+        return HttpResponseRedirect('restaurant_order_view')
