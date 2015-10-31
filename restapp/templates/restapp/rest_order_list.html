@@ -10,6 +10,7 @@
                     <div class="panel-body">
                         <div class="col-lg-5 col-md-7 col-sm-8">
                             <h3>{{ food.timestamp }}</h3><br><br>
+                            <h1>Allergies: {{ food.customer.profile.allergies }}</h1><br>
                                 {% for food in food.items.all %}
                                     <h1><li>{{ food }}</li></h1><br><br>
                                 {% endfor %}
