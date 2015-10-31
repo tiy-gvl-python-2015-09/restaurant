@@ -38,7 +38,7 @@
                                             Update Your Bookmark
                                         </a>
                                     </button>
-                                     <form action="{% url 'undisplay_view' object.owner.id %}" method="post">
+                                     <form action="{% url 'undisplay_view' object.id %}" method="post">
                                         {% csrf_token %}
                                         <input type="submit" value="remove display" class=""/>
                                     </form>
