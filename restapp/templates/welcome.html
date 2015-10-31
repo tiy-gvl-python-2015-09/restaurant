@@ -6,17 +6,25 @@
 
 {% block content %}
     <h1>
-        Welcome to the RestApp!
+        DeliverMe
     </h1>
     <br>
-    <h3>
-        With our site, you can:
+    <br>
+    <br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3 align="center" style="font-style: italic" >
+        Food Delivery Has Never Been Easier!
     </h3>
-        <h5>
-            <ul>
-                <li>Create an account as a user or a customer</li>
-                <li></li>
-            </ul>
-        </h5>
-
+    <br>
+    <div class="span7 text-center">
+    <form action="/create_user/" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary btn-lg" type="submit">
+            <div>Sign Up Now!</div>
+    </form>
+    </div>
 {% endblock %}
