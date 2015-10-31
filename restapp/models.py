@@ -52,6 +52,7 @@ class Item(models.Model):
     description = models.TextField()
     price = models.FloatField()
     owner = models.ForeignKey(User)
+    display = models.BooleanField()
 
     def __str__(self):
         return self.item_name
