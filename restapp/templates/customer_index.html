@@ -11,28 +11,31 @@
         <div class="row">
             <div class="col-m-12">
                 <h3 style="font-style: italic"><u><b>Restaurants in Your Area</u></b></h3>
-                <div class="row">
-        <div class="col-s-6"></div>
-        <div class="col-s-6">
-            <div class="panel panel-success">
-                {% for object in object_list %}
-                    {% if object.user_type == 'restaurant' %}
-                        <div class="panel-heading">
-                            <a href="{% url 'menu_view' object.id %}">
-                                {{ object.name }}
-                            </a>
-                        </div>
-                        <div class="panel-body">
-                            <ul>
-                                <p><b>Cuisine</b> <br>{{ object.get_cuisine_display }}</p>
-                            </ul>
-                            <ul>
-                                <p><b>Address</b> <br>{{ object.address }}</p>
-                            </ul>
-                        </div>
-                    {% endif %}
-                {% endfor %}
             </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="panel panel-danger">
+                    {% for object in object_list %}
+                        {% if object.user_type == 'restaurant' %}
+                            <div class="panel-heading">
+                                <a href="{% url 'menu_view' object.id %}">
+                                    {{ object.name }}
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <ul>
+                                    <p><b>Cuisine</b> <br>{{ object.get_cuisine_display }}</p>
+                                </ul>
+                                <ul>
+                                    <p><b>Address</b> <br>{{ object.address }}</p>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xs-6"></div>
         </div>
     </div>
 {% endblock %}
