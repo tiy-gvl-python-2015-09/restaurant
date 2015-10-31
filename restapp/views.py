@@ -143,10 +143,10 @@ class ItemUpdateView(UpdateView):
     success_url = '/'
 
 
-class RemoveOrderView(ListView):
+class RemoveOrderView(View):
 
-    def change_status(self, request, restaurant_id):
-        order = Order.objects.get(id=restaurant_id)
-        order.fulfilled = not order.fulfilled
+    def post(self, request, order_id):
+        order = Order.objects.get(id=order_id)
+        order.fulfilled = True
         order.save()
-        return HttpResponseRedirect('restaurant_order_view')
+        return HttpResponseRedirect(reverse('restaurant_order_view', kwargs={'pk': request.user.id}))
