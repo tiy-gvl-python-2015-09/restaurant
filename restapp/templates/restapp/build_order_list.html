@@ -41,7 +41,12 @@
         {% for order in request.user.profile.customer_open_order %}
             {% for item in order.items.all %}
                 <ul>
-                    <li>{{ item.item_name }}</li>
+                    <li>
+                        <form action="{% url 'delete_from_order' item.id %}" method="post">{{ item.item_name }}
+                            {% csrf_token %}
+                            <input type="submit" value="Delete from Order"/>
+                        </form>
+                    </li>
                 </ul>
             {% endfor %}
             <form action="{% url 'submit_order' order.id %}" method="post">

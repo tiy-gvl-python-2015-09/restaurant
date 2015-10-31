@@ -182,7 +182,13 @@ class AddToOrderView(View):
 
 
 class DeleteFromOrderView(View):
-    pass
+
+    def post(self, request, item_id):
+        item = Item.objects.get(id=item_id)
+        current_order = Order.objects.filter(customer=request.user, restaurant=item.owner, submitted=False)
+        order = current_order[0]
+        order.items.remove(item)
+        return HttpResponseRedirect(reverse("build_order", kwargs={"pk": item.owner.id}))
 
 
 class SubmitOrderView(View):
