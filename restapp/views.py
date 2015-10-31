@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
-from restapp.models import Profile, Order, Item, ProfileManager
+from restapp.models import Profile, Order, Item, ProfileManager, ItemCounter
 
 
 class RestaurantsList(ListView):
@@ -104,8 +104,9 @@ class CustomerOrderView(ListView):
 
 class CreateItemView(CreateView):
     model = Item
-    fields = ['item_name', 'description', 'price']
     success_url = '/restaurant/menu_view/'
+
+    fields = ['item_name', 'description', 'price', 'display']
 
     def form_valid(self, form):
         model = form.save(commit=False)
@@ -178,10 +179,16 @@ class AddToOrderView(View):
         current_order = Order.objects.filter(customer=request.user, restaurant=item.owner, submitted=False)
         if not current_order:
             new_order = Order.objects.create(customer=request.user, restaurant=item.owner, submitted=False, fulfilled=False)
-            new_order.items = [item]
+            ItemCounter.objects.create(item=item, order=new_order, count=1)
         elif len(current_order) == 1:
             order = current_order[0]
-            order.items.add(item)
+            itemcounter = ItemCounter.objects.filter(item=item, order=order)
+            if not itemcounter:
+                ItemCounter.objects.create(item=item, order=order, count=1)
+            else:
+                itemcounter = itemcounter[0]
+                itemcounter.count += 1
+                itemcounter.save()
         else:
             pass #direct to special page that shows they have more than 1 open order
         return HttpResponseRedirect(reverse("build_order", kwargs={"pk": item.owner.id}))
