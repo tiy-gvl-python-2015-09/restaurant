@@ -82,4 +82,3 @@ class ItemCounter(models.Model):
     item = models.ForeignKey(Item)
     order = models.ForeignKey(Order)
     count = models.IntegerField()
-    
