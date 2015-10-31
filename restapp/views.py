@@ -68,7 +68,7 @@ class UserRedirectView(View):
             if request.user.profile.name == '':
                 return HttpResponseRedirect(reverse("customer_update", kwargs={"pk": request.user.id}))
             else:
-                return HttpResponseRedirect(reverse("customer_index", kwargs={"pk": request.user.id}))
+                return HttpResponseRedirect(reverse("restaurant_list",))
         else:
             return HttpResponseRedirect(reverse("update_profile", kwargs={"pk": request.user.id}))
 
@@ -82,7 +82,6 @@ class RestaurantIndex(TemplateView):
         context = super(RestaurantIndex, self).get_context_data(**kwargs)
         context['object'] = User.objects.filter(id=kwargs["pk"])[0]
         return context
-
 
 class CustomerIndex(TemplateView):
 
@@ -104,9 +103,8 @@ class CustomerOrderView(ListView):
 
 class CreateItemView(CreateView):
     model = Item
-    success_url = '/restaurant/menu_view/'
-
     fields = ['item_name', 'description', 'price', 'display']
+    success_url = '/restaurant/menu_view/'
 
     def form_valid(self, form):
         model = form.save(commit=False)

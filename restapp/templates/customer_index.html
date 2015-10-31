@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
+
+</div>
     <div class="container">
         <div class="row">
-            <div class="col-m-12" style="background: #222222;color: #9d9d9d;border: 3px #222222">
-                <h3>Order from any of these fine restaurants!</h3>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-s-12">
+            <div class="col-m-12">
+                <h3 style="font-style: italic"><u><b>Restaurants in Your Area</u></b></h3>
+                <div class="row">
+        <div class="col-s-6"></div>
+        <div class="col-s-6">
             <div class="panel panel-success">
                 {% for object in object_list %}
                     {% if object.user_type == 'restaurant' %}
@@ -24,7 +24,10 @@
                         </div>
                         <div class="panel-body">
                             <ul>
-                                <li>{{ object.get_cuisine_display }}</li>
+                                <p><b>Cuisine</b> <br>{{ object.get_cuisine_display }}</p>
+                            </ul>
+                            <ul>
+                                <p><b>Address</b> <br>{{ object.address }}</p>
                             </ul>
                         </div>
                     {% endif %}
