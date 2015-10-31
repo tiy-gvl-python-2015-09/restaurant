@@ -53,6 +53,10 @@
                 {% csrf_token %}
                 <input type="submit" value="Submit Order"/>
             </form>
+            <form action="{% url 'cancel_order' order.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Cancel Order"/>
+            </form>
         {% endfor %}
     </div>
     <div>

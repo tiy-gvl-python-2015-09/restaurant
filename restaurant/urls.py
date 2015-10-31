@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView, RestaurantIndex,\
     CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate, \
     RestaurantOrderView, ItemListView, CompOrderView, ItemUpdateView, RemoveOrderView, \
-    BuildOrderView, AddToOrderView, SubmitOrderView, DeleteFromOrderView
+    BuildOrderView, AddToOrderView, SubmitOrderView, DeleteFromOrderView, CancelOrderView
 
 urlpatterns = [
     url(r'^restaurant/$', RestaurantsList.as_view(), name='restaurant_list'),
@@ -46,4 +46,5 @@ urlpatterns = [
     url(r'^add_to_order/(?P<item_id>\d+)/$', login_required(AddToOrderView.as_view()), name='add_to_order'),
     url(r'^submit_order/(?P<order_id>\d+)/$', login_required(SubmitOrderView.as_view()), name='submit_order'),
     url(r'^delete_from_order/(?P<item_id>\d+)/$', login_required(DeleteFromOrderView.as_view()), name='delete_from_order'),
+    url(r'^customer/cancel_order/(?P<order_id>\d+)/$', login_required(CancelOrderView.as_view()), name='cancel_order'),
 ]
