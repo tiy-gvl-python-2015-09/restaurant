@@ -14,32 +14,110 @@
 {% endblock %}
 
 {% block content %}
-    <h1>My Menu</h1>
-
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    {% with object_list|first as first_object %}
-                    {{ first_object.owner.profile.name }} Menu
-                    {% endwith %}
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        {% for object in object_list %}
-                             <div class="panel-heading">
-                                {{ object.item_name }}
-                            </div>
-                            <div class="panel-body">
-                                <ul>
-                                    <li>{{ object.description }}</li>
-                                    <li>${{ object.price| floatformat:2 }}</li>
-                                </ul>
-                            </div>
-                        {% endfor %}
+    {% if user.profile.user_type == 'restaurant' %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        {% with object_list|first as first_object %}
+                        <h2>
+                            {{ first_object.owner.profile.name }} Menu
+                        </h2>
+                        {% endwith %}
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            {% for object in object_list %}
+                                 <div class="panel-heading">
+                                    <h4>
+                                        {{ object.item_name }}
+                                    </h4>
+                                    <button class="button-default">
+                                        <a href="{% url 'item_update' object.id %}">
+                                            Update Your Bookmark
+                                        </a>
+                                    </button>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><h5>Description:  {{ object.description }}</h5></li>
+                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% elif user.profile.user_type == 'customer' %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        {% with object_list|first as first_object %}
+                        <h2>
+                            {{ first_object.owner.profile.name }} Menu
+                        </h2>
+                        {% endwith %}
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            {% for object in object_list %}
+                                 <div class="panel-heading">
+                                    <h4>
+                                        {{ object.item_name }}
+                                    </h4>
+                                 <div class="align-right">
+                                     <button class="btn-danger">
+                                         Add to order
+                                     </button>
+                                 </div>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><h5>Description:  {{ object.description }}</h5></li>
+                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        {% with object_list|first as first_object %}
+                        <h2>
+                            {{ first_object.owner.profile.name }} Menu
+                        </h2>
+                        {% endwith %}
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            {% for object in object_list %}
+                                 <div class="panel-heading">
+                                    <h4>
+                                        {{ object.item_name }}
+                                    </h4>
+                                 </div>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><h5>Description:  {{ object.description }}</h5></li>
+                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}

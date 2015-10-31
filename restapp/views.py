@@ -136,3 +136,9 @@ class ItemListView(ListView):
     def get_queryset(self):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(owner__id=user_id)
+
+class ItemUpdateView(UpdateView):
+    model = Item
+    fields = ['item_name', 'description', 'price']
+    success_url = '/'
+

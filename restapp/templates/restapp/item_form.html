@@ -5,10 +5,20 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Create New Menu Item</h1>
+    {% if item.item_name == None %}
+        <h1>Create New Menu Item</h1>
     <form action="" method='post'>
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class= "button-danger">Create Menu Item</button>
     </form>
+    {% else %}
+        <h1>Update Menu Item</h1>
+        <form action="" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class= "button-danger">Edit Item</button>
+        </form>
+    {% endif %}
+
 {% endblock %}
