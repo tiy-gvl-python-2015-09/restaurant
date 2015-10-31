@@ -76,3 +76,8 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+class ItemCounter(models.models):
+    item = models.ForeignKey(Item)
+    order = models.ForeignKey(Order)
+    count = models.IntegerField()
