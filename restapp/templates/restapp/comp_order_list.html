@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for food in object_list %}
-        {% if food.submitted == True %}
-            {% if food.fulfilled == True %}
+    {% for order in object_list %}
+        {% if order.submitted == True %}
+            {% if order.fulfilled == True %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><h2>{{ food.id }}</h2></h3></div>
+                        <h3 class="panel-title"><h2>{{ order.id }}</h2></h3></div>
                     <div class="panel-body">
-                        <h3>Name: {{ food.customer.profile.name }}</h3>
-                        <h3>Phone Number: {{ food.customer.profile.phone_num }}</h3>
-                        <h3>{{ food.timestamp }}</h3><br><br>
-                            {% for food in food.items.all %}
-                                <h1><li>{{ food }}</li></h1><br><br>
+                        <h3>Name: {{ order.customer.profile.name }} </h3>
+                        <h3>Phone Number: {{ order.customer.profile.phone_num }}</h3>
+                        <h3>{{ order.timestamp }}</h3><br><br>
+                            {% for food in order.items.all %}
+                                <h1><li>{{ food }}
+                                    {% for itemcounter in food.itemcounter_set.all %}
+                                        {% if itemcounter.order == order %}
+                                            {{ itemcounter.count }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </li></h1><br><br>
                             {% endfor %}
-                            <h1>Comments: {{ food.comments }}</h1><br><br>
+                            <h1>Comments: {{ order.comments }}</h1><br><br>
                         </div>
                             <div class="col-lg-7 col-md-5 col-sm-4">
                              </div>
