@@ -144,10 +144,9 @@ class ItemUpdateView(UpdateView):
 
 
 class RemoveOrderView(ListView):
-    template_name = 'restapp/rest_order_list.html'
 
-    def change_status(self, request, resturant_id):
-        order = Order.objects.get(id=resturant_id)
+    def change_status(self, request, restaurant_id):
+        order = Order.objects.get(id=restaurant_id)
         order.fulfilled = not order.fulfilled
         order.save()
         return HttpResponseRedirect('restaurant_order_view')
