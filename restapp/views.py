@@ -150,3 +150,46 @@ class RemoveOrderView(View):
         order.fulfilled = True
         order.save()
         return HttpResponseRedirect(reverse('restaurant_order_view', kwargs={'pk': request.user.id}))
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(restaurant__id=user_id)
+
+
+class BuildOrderView(ListView):
+    model = Item
+    template_name = 'restapp/build_order_list.html'
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(owner__id=user_id)
+
+
+class AddToOrderView(View):
+
+    def post(self, request, item_id):
+        item = Item.objects.get(id=item_id)
+        current_order = Order.objects.filter(customer=request.user, restaurant=item.owner, submitted=False)
+        if not current_order:
+            new_order = Order.objects.create(customer=request.user, restaurant=item.owner, submitted=False, fulfilled=False)
+            new_order.items = [item]
+        elif len(current_order) == 1:
+            order = current_order[0]
+            order.items.add(item)
+        else:
+            pass #direct to special page that shows they have more than 1 open order
+        return HttpResponseRedirect(reverse("build_order", kwargs={"pk": item.owner.id}))
+
+
+class DeleteFromOrderView(View):
+    pass
+
+
+class SubmitOrderView(View):
+
+    def post(self, request, order_id):
+        order = Order.objects.get(id=order_id)
+        order.submitted = True
+        order.save()
+        return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
+

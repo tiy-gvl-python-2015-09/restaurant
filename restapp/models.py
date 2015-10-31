@@ -34,6 +34,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
+    def customer_open_order(self):
+        return Order.objects.filter(customer = self.user, submitted=False)
+
 
 @receiver(post_save, sender=User)
 def user_post_save(sender, **kwargs):
