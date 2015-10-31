@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
+
 # Create your views here.
 from django.views.generic import ListView, View, CreateView, UpdateView, TemplateView
 from restapp.models import Profile, Order, Item, ProfileManager
@@ -62,7 +63,7 @@ class UserRedirectView(View):
             if request.user.profile.name == '':
                 return HttpResponseRedirect(reverse("restaurant_update", kwargs={"pk": request.user.id}))
             else:
-                return HttpResponseRedirect(reverse("restaurant_index", kwargs={"pk": request.user.id}))
+                return HttpResponseRedirect(reverse("restaurant_order_view", kwargs={"pk": request.user.id}))
         elif request.user.profile.user_type == "customer":
             if request.user.profile.name == '':
                 return HttpResponseRedirect(reverse("customer_update", kwargs={"pk": request.user.id}))
@@ -104,15 +105,18 @@ class CustomerOrderView(ListView):
 class CreateItemView(CreateView):
     model = Item
     fields = ['item_name', 'description', 'price']
-    success_url = '/'
+    success_url = '/restaurant/menu_view/'
 
     def form_valid(self, form):
         model = form.save(commit=False)
         model.owner = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse('menu_view',args=(self.object.owner.id,))
 
 class RestaurantOrderView(ListView):
+
     model = Order
     template_name = 'restapp/rest_order_list.html'
 
@@ -140,7 +144,9 @@ class ItemListView(ListView):
 class ItemUpdateView(UpdateView):
     model = Item
     fields = ['item_name', 'description', 'price']
-    success_url = '/'
+    
+    def get_success_url(self):
+        return reverse('menu_view',args=(self.object.owner.id,))
 
 
 class RemoveOrderView(View):
