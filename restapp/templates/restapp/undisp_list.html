@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+        {% with object_list|first as first_object %}
+            {% if user.profile.user_type == 'restaurant' %}
+            My Menu | {{ first_object.owner.profile.name }}
+
+        {% else %}
+
+            Menu | {{ first_object.owner.profile.name }}
+    {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        {% with object_list|first as first_object %}
+                        <h2>
+                            {{ first_object.owner.profile.name }} Menu
+                        </h2>
+                        {% endwith %}
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            {% for object in object_list %}
+                                {% if object.display == False %}
+                                 <div class="panel-heading">
+                                    <h4>
+                                        {{ object.item_name }}
+                                    </h4>
+                                    <button class="button-default">
+                                        <a href="{% url 'item_update' object.id %}">
+                                            Update Your Bookmark
+                                        </a>
+                                    </button>
+                                     <form action="" method="post">
+                                         {% csrf_token %}
+                                         <input type="submit" value="display item" class=""/>
+                                     </form>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><h5>Description:  {{ object.description }}</h5></li>
+                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

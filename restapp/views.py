@@ -140,6 +140,15 @@ class ItemListView(ListView):
         return self.model.objects.filter(owner__id=user_id)
 
 
+class UnDisplayedItemListView(ListView):
+    model = Item
+    template_name = 'restapp/undisp_list.html'
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(owner__id=user_id)
+
+
 class ItemUpdateView(UpdateView):
     model = Item
     fields = ['item_name', 'description', 'price']
@@ -206,7 +215,7 @@ class SubmitOrderView(View):
 
     def post(self, request, order_id):
         order = Order.objects.get(id=order_id)
-        order.submitted = True
+        order.submitted = not order.submitted
         order.save()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
 
@@ -218,4 +227,18 @@ class CancelOrderView(View):
         order.delete()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
 
+class DisplayItemView(View):
 
+    def post(self, request, item_id):
+        item = Item.objects.get(id=item_id)
+        item.display = not item.display
+        item.save()
+        return HttpResponseRedirect(reverse("undisp_menu_view", kwargs={"pk": request.user.id}))
+
+class UnDisplayItemView(View):
+
+    def post(self, request, item_id):
+        item = Item.objects.get(id=item_id)
+        item.display = not item.display
+        item.save()
+        return HttpResponseRedirect(reverse("menu_view", kwargs={"pk": request.user.id}))

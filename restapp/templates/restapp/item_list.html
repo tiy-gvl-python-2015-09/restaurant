@@ -28,6 +28,7 @@
                     <div class="panel-body">
                         <div class="panel panel-primary">
                             {% for object in object_list %}
+                                {% if object.display == True %}
                                  <div class="panel-heading">
                                     <h4>
                                         {{ object.item_name }}
@@ -37,6 +38,10 @@
                                             Update Your Bookmark
                                         </a>
                                     </button>
+                                     <form action="{% url 'undisplay_view' object.owner.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" value="remove display" class=""/>
+                                    </form>
                                 </div>
                                 <div class="panel-body">
                                     <ul>
@@ -44,6 +49,7 @@
                                         <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
                                     </ul>
                                 </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -64,6 +70,7 @@
                     <div class="panel-body">
                         <div class="panel panel-primary">
                             {% for object in object_list %}
+                                {% if object.display == True %}
                                  <div class="panel-heading">
                                     <h4>
                                         {{ object.item_name }}
@@ -80,6 +87,7 @@
                                         <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
                                     </ul>
                                 </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -100,6 +108,7 @@
                     <div class="panel-body">
                         <div class="panel panel-primary">
                             {% for object in object_list %}
+                                {% if object.display == True %}
                                  <div class="panel-heading">
                                     <h4>
                                         {{ object.item_name }}
@@ -112,6 +121,7 @@
                                         <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
                                     </ul>
                                 </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -119,5 +129,4 @@
             </div>
         </div>
     {% endif %}
-
 {% endblock %}

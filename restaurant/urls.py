@@ -19,7 +19,8 @@ from django.contrib.auth.decorators import login_required
 from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, UserRedirectView, RestaurantIndex,\
     CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate, \
     RestaurantOrderView, ItemListView, CompOrderView, ItemUpdateView, RemoveOrderView, \
-    BuildOrderView, AddToOrderView, SubmitOrderView, DeleteFromOrderView, CancelOrderView
+    BuildOrderView, AddToOrderView, SubmitOrderView, DeleteFromOrderView, CancelOrderView, UnDisplayItemView, \
+    DisplayItemView, UnDisplayedItemListView
 
 urlpatterns = [
     url(r'^restaurant/$', RestaurantsList.as_view(), name='restaurant_list'),
@@ -41,6 +42,9 @@ urlpatterns = [
     url(r'^update_restaurant/(?P<pk>\d+)/$', login_required(RestaurantUpdate.as_view()), name='restaurant_update'),
     url(r'^update_customer/(?P<pk>\d+)/$', login_required(CustomerUpdate.as_view()), name='customer_update'),
     url(r'^restaurant/menu_view/(?P<pk>\d+)/$', ItemListView.as_view(), name='menu_view'),
+    url(r'^restaurant/menu_view/undisplayed/(?P<pk>\d+)/$', UnDisplayedItemListView.as_view(), name='undisp_menu_view'),
+    url(r'^restaurant/displayed/(?P<item_id>\d+)/$', DisplayItemView.as_view(), name='display_view'),
+    url(r'^restaurant/undisplayed/(?P<item_id>\d+)/$', UnDisplayItemView.as_view(), name='undisplay_view'),
     url(r'^restaurant/update/(?P<pk>\d+)/$', ItemUpdateView.as_view(), name="item_update"),
     url(r'^customer/build_order/(?P<pk>\d+)/$', login_required(BuildOrderView.as_view()), name='build_order'),
     url(r'^add_to_order/(?P<item_id>\d+)/$', login_required(AddToOrderView.as_view()), name='add_to_order'),
