@@ -4,12 +4,6 @@
     line-height: 10;
 }
 
-.page_header {
-    width: 100%;
-    font-size: 14;
-    line-height: 8;
-}
-
 button {margin:auto;
   display:block;
 }
@@ -34,4 +28,27 @@ button {margin:auto;
 .btn-primary:active, .btn-primary.active {
     background: #007299;
     box-shadow: none;
+}
+
+.super-big-button {
+    width: 100%;
+    font-size: 2.5em;
+    line-height: 10;
+}
+
+.jumbotron {
+    background-image: url("http://blog.madhungry.com/files/2011/10/shrimp-pad-thai-mhlb2048.jpg");
+    background-repeat: "no-repeat";
+    height: 500px;
+}
+
+.jumbotron h1 {
+    color: yellow;
+    font-family='Shift', sans-serif;
+    font-weight: bold;
+}
+
+.jumbotron {
+    color: yellow;
+    font-style: italic;
 }
