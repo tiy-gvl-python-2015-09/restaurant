@@ -94,4 +94,4 @@ class ItemCounter(models.Model):
         steve = []
         for price in all_prices:
             steve.append(price * self.count)
-        return steve
+        return sum(steve)
