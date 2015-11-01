@@ -11,7 +11,7 @@
                 <li><h3>$ {{ order.price | floatformat:2 }}</h3></li><br><br>
                     {% for itemcounter in order_list.itemcounter_set.all %}
                         {% if itemcounter.order == order %}
-                            <h1>{{ itemcounter.o }}</h1>
+                            <h1>{{ itemcounter. }}</h1>
                         {% endif %}
                     {% endfor %}
             {% endfor %}
