@@ -102,6 +102,14 @@ class CustomerOrderView(ListView):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(customer__id=user_id)
 
+class FulfilledOrderView(ListView):
+    model = Order
+    template_name = 'restapp/fulf_order_list.html'
+
+    def get_queryset(self):
+        user_id = self.kwargs.get("pk")
+        return self.model.objects.filter(customer__id=user_id)
+
 
 class CreateItemView(CreateView):
     model = Item

@@ -20,7 +20,7 @@ from restapp.views import RestaurantsList, MenuList, IndexView, ProfileUpdate, U
     CustomerIndex, WelcomeView, CreateItemView, UserCreate, CustomerOrderView, RestaurantUpdate, CustomerUpdate, \
     RestaurantOrderView, ItemListView, CompOrderView, ItemUpdateView, RemoveOrderView, \
     BuildOrderView, AddToOrderView, SubmitOrderView, DeleteFromOrderView, CancelOrderView, UnDisplayItemView, \
-    DisplayItemView, UnDisplayedItemListView
+    DisplayItemView, UnDisplayedItemListView, FulfilledOrderView
 
 urlpatterns = [
     url(r'^restaurant/$', RestaurantsList.as_view(), name='restaurant_list'),
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^restaurant/completed/(?P<pk>\d+)/$', CompOrderView.as_view(), name='comp_order_view'),
     url(r'^customer/(?P<pk>\d+)/$', CustomerIndex.as_view(), name='customer_index'),
     url(r'^customer/order/(?P<pk>\d+)/$', CustomerOrderView.as_view(), name='customer_order_view'),
+    url(r'^customer/order/ready/(?P<pk>\d+)/$', FulfilledOrderView.as_view(), name='fulfilled_order_view'),
     url(r'^welcome/', WelcomeView.as_view(), name='welcome'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^restaurant/create_item/$', CreateItemView.as_view(), name='create_item'),

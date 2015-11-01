@@ -52,7 +52,7 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage Orders <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="{% url 'customer_order_view' user.id %}">View Orders</a></li>
-                        <li><a href="#">Complete Orders</a></li>
+                        <li><a href="{% url 'fulfilled_order_view' user.id %}">Complete Orders</a></li>
                       </ul>
                     </li>
                 {% endif %}
