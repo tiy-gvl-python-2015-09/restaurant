@@ -59,6 +59,7 @@
                     </li>
                 </ul>
             {% endfor %}
+            Total Cost: ${{ order.total_cost|floatformat:2 }}
             </br>
             <form action="{% url 'submit_order' order.id %}" method="post">
                 {% csrf_token %}

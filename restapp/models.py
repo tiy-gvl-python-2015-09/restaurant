@@ -68,16 +68,13 @@ class Order(models.Model):
     submitted = models.BooleanField()
 
 
-#    @property
-#    def total_cost(self):
-#        all_items = []
-#        for order in Order.objects.get(id=self.id):
-#            for item in order.items.all():
-#                for counter in item.itemcounter_set.all():
-#                    if counter.item.id == item.id:
-#                        if (item.price) not in all_items:
-#                            all_items.append(item.price)
-#        return all_items
+    @property
+    def total_cost(self):
+        item_costs = []
+        for item in self.items.all():
+            itemcounter = ItemCounter.objects.get(item=item, order=self)
+            item_costs.append(itemcounter.item_cost)
+        return sum(item_costs)
 
 
 class ItemCounter(models.Model):

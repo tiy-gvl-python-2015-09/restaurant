@@ -15,12 +15,12 @@
                                         {% if itemcounter.order == order %}
                                             {{ itemcounter.count }}<br>
                                             $ {{ itemcounter.item_cost | floatformat:2 }}
-                                            {{ itemcounter.total_cost }}
                                         {% endif %}
                                     {% endfor %}
                                     </li></h1><br><br>
                                 {% endfor %}
-                            <h1>Comments: {{ order.comments }}</h1><br><br>
+                            <h1>Comments: {{ order.comments }}</h1>
+                <br><h1>Total Cost: ${{ order.total_cost|floatformat:2 }}</h1><br>
             {% endif %}
         {% endif %}
     {% endfor %}
