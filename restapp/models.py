@@ -88,3 +88,10 @@ class ItemCounter(models.Model):
     def item_cost(self):
         return self.item.price * self.count
 
+    @property
+    def total_cost(self):
+        all_items = []
+        if ItemCounter.item.id == Order.items.id:
+            all_items.append(ItemCounter.item_cost)
+        return sum(all_items)
+
