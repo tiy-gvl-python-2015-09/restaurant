@@ -19,7 +19,7 @@
                     {% for object in object_list %}
                         {% if object.user_type == 'restaurant' %}
                             <div class="panel-heading">
-                                <a href="{% url 'menu_view' object.id %}">
+                                <a href="{% url 'build_order' object.id %}">
                                     {{ object.name }}
                                 </a>
                             </div>

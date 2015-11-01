@@ -1,32 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for order in object_list %}
-        {% if order.submitted == True %}
-            {% if order.fulfilled == True %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><h2>{{ order.id }}</h2></h3></div>
-                    <div class="panel-body">
-                        <h3>Name: {{ order.customer.profile.name }} </h3>
-                        <h3>Phone Number: {{ order.customer.profile.phone_num }}</h3>
-                        <h3>{{ order.timestamp }}</h3><br><br>
-                            {% for food in order.items.all %}
-                                <h1><li>{{ food }}
-                                    {% for itemcounter in food.itemcounter_set.all %}
-                                        {% if itemcounter.order == order %}
-                                            {{ itemcounter.count }}
-                                        {% endif %}
-                                    {% endfor %}
-                                </li></h1><br><br>
-                            {% endfor %}
-                            <h1>Comments: {{ order.comments }}</h1><br><br>
-                        </div>
-                            <div class="col-lg-7 col-md-5 col-sm-4">
-                             </div>
-                        </div>
-                </div>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-danger">
+                    {% for order in object_list %}
+                        {% if order.submitted == True %}
+                            {% if order.fulfilled == True %}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><p>Order ID: {{ order.id }}</p></h3></div>
+                                    <div class="panel-body">
+                                        <p><strong>Customer Name</strong><br> {{ order.customer.profile.name }} </p>
+                                        <p><strong>Phone Number</strong><br>{{ order.customer.profile.phone_num }}</p>
+                                        <div><strong>Time Completed</strong><p>{{ order.timestamp }}</p>
+                                            {% for food in order.items.all %}
+                                                 <div><strong>Order</strong><p>{{ food }}:
+                                                    {% for itemcounter in food.itemcounter_set.all %}
+                                                        {% if itemcounter.order == order %}
+                                                            {{ itemcounter.count }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </p>
+                                            {% endfor %}
+                                                {% if order.comments == True %}
+                                                    <div><strong>Comments</strong><div>{{ order.comments }}</div>
+                                                {% else %}
+                                                    <div><strong>Comments</strong><div>None</div>
+                                                {% endif %}
+                                        </div>
+                                            <div class="col-lg-7 col-md-5 col-sm-4">
+                                             </div>
+                                        </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
 {% endblock %}
