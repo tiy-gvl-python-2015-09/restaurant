@@ -84,6 +84,7 @@ class RestaurantIndex(TemplateView):
         context['object'] = User.objects.filter(id=kwargs["pk"])[0]
         return context
 
+
 class CustomerIndex(TemplateView):
 
     template_name = "customer_index.html"
@@ -115,6 +116,7 @@ class CreateItemView(CreateView):
     def get_success_url(self):
         return reverse('menu_view',args=(self.object.owner.id,))
 
+
 class RestaurantOrderView(ListView):
 
     model = Order
@@ -132,6 +134,7 @@ class CompOrderView(ListView):
     def get_queryset(self):
         user_id = self.kwargs.get("pk")
         return self.model.objects.filter(restaurant__id=user_id)
+
 
 class ItemListView(ListView):
     model = Item
@@ -233,6 +236,7 @@ class CancelOrderView(View):
         order.delete()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
 
+
 class DisplayItemView(View):
 
     def post(self, request, item_id):
@@ -240,6 +244,7 @@ class DisplayItemView(View):
         item.display = not item.display
         item.save()
         return HttpResponseRedirect(reverse("undisp_menu_view", kwargs={"pk": request.user.id}))
+
 
 class UnDisplayItemView(View):
 
