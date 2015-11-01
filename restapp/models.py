@@ -67,16 +67,17 @@ class Order(models.Model):
     comments = models.TextField(blank=True)
     submitted = models.BooleanField()
 
-    @property
-    def order_cost(self):
-        item_cost = []
-        order_items = self.items.all()
-        for item in order_items:
-            item_cost.append(item.price)
-        return sum(item_cost)
 
-    def __str__(self):
-        return str(self.id)
+#    @property
+#    def total_cost(self):
+#        all_items = []
+#        for order in Order.objects.get(id=self.id):
+#            for item in order.items.all():
+#                for counter in item.itemcounter_set.all():
+#                    if counter.item.id == item.id:
+#                        if (item.price) not in all_items:
+#                            all_items.append(item.price)
+#        return all_items
 
 
 class ItemCounter(models.Model):
@@ -87,11 +88,3 @@ class ItemCounter(models.Model):
     @property
     def item_cost(self):
         return self.item.price * self.count
-
-    @property
-    def total_cost(self):
-        all_items = []
-        if ItemCounter.item.id == Order.items.id:
-            all_items.append(ItemCounter.item_cost)
-        return sum(all_items)
-
