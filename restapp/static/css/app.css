@@ -39,20 +39,73 @@ button {margin:auto;
 .jumbotron {
     background-image: url("http://blog.madhungry.com/files/2011/10/shrimp-pad-thai-mhlb2048.jpg");
     background-repeat: "no-repeat";
-    height: 500px;
+    padding-left: 5%;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    height: 400px;
+    color: yellow;
 }
 
 .jumbotron h1 {
     color: yellow;
-    font-family='Shift', sans-serif;
+    font-family: 'Shift', sans-serif;
     font-weight: bold;
 }
 
-.jumbotron {
-    color: yellow;
+.jumbotron p {
     font-style: italic;
 }
+
+.panel-body {
+    background-color: navajowhite;
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+.panel.panel-success {
+    padding-left: 3%;
+    background-color: goldenrod;
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+    margin: 0%
+}
+
+.panel.panel-success h2{
+    font-family: 'Shift', sans-serif;
+}
+
+.panel.panel-success h3{
+    font-family: 'Shift', sans-serif;
+}
+
+.panel-primary {
+    background-color: navajowhite;
+    padding-bottom: 10%;
+    margin: 0%
+}
+
+.panel-primary h3{
+    background-color: navajowhite;
+    display: inline;
+    padding-left: 2%;
+    font-size: large;
+    font-weight: bold;
+}
+
+.list-group {
+    background-color: lightgoldenrodyellow;
+    margin: 0px
+}
+
+.list-group-item {
+    font-family: 'Shift', sans-serif;
+    background-color: lightgoldenrodyellow;
+    color: dimgrey;
+    font-style: italic;
+    padding-left: 8%;
+}
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd;
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}

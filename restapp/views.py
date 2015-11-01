@@ -15,7 +15,8 @@ class RestaurantsList(ListView):
 
 
 class MenuList(ListView):
-    pass
+    model = Item
+    template_name = "restapp/item_list.html"
 
 
 class IndexView(View):
