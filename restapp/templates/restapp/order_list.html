@@ -6,9 +6,14 @@
 {% block content %}
     {% for item in object_list %}
         <h3>{{ item.user }}</h3><br><br>
-            {% for food in item.items.all %}
-                <li><h3>{{ food }}</h3></li>
-                <li><h3>$ {{ food.price | floatformat:2 }}</h3></li><br><br>
+            {% for order in item.items.all %}
+                <li><h3>{{ order }}</h3></li>
+                <li><h3>$ {{ order.price | floatformat:2 }}</h3></li><br><br>
+                    {% for itemcounter in order_list.itemcounter_set.all %}
+                        {% if itemcounter.order == order %}
+                            <h1>{{ itemcounter.o }}</h1>
+                        {% endif %}
+                    {% endfor %}
             {% endfor %}
         <h3>Total cost:</h3>
         <h4>$ {{ item.order_cost | floatformat:2  }}</h4>

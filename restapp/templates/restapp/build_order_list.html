@@ -18,6 +18,7 @@
                 <div class="panel-body">
                     <div class="panel panel-primary">
                         {% for object in object_list %}
+                            {% if object.display == True %}
                              <div class="panel-heading">
                                 <form action="{% url 'add_to_order' object.id %}" method="post">{{ object.item_name }}
                                      {% csrf_token %}
@@ -30,6 +31,7 @@
                                     <li>${{ object.price|floatformat:2 }}</li>
                                 </ul>
                             </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
