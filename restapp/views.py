@@ -207,7 +207,12 @@ class DeleteFromOrderView(View):
         item = Item.objects.get(id=item_id)
         current_order = Order.objects.filter(customer=request.user, restaurant=item.owner, submitted=False)
         order = current_order[0]
-        order.items.remove(item)
+        itemcounter = ItemCounter.objects.get(item=item, order=order)
+        if itemcounter.count > 1:
+            itemcounter.count -= 1
+            itemcounter.save()
+        else:
+            itemcounter.delete()
         return HttpResponseRedirect(reverse("build_order", kwargs={"pk": item.owner.id}))
 
 
@@ -216,6 +221,7 @@ class SubmitOrderView(View):
     def post(self, request, order_id):
         order = Order.objects.get(id=order_id)
         order.submitted = not order.submitted
+        order.comments = comments
         order.save()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
 

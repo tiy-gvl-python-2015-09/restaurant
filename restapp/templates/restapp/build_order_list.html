@@ -47,7 +47,7 @@
                         <form action="{% url 'delete_from_order' item.id %}" method="post">{{ item.item_name }}
                             {% for itemcounter in item.itemcounter_set.all %}
                                 {% if itemcounter.order == order %}
-                                    {{ itemcounter.count }}
+                                    ({{ itemcounter.count }})
                                 {% endif %}
                             {% endfor %}
                             {% csrf_token %}
@@ -56,14 +56,21 @@
                     </li>
                 </ul>
             {% endfor %}
+            </br>
+            <div class="form-group">
+                <label for="comments">Order Comments</label>
+                <input type="text" class="form-control" id="comments" placeholder="Please provide special preparation instructions or allergies you have">
+            </div>
             <form action="{% url 'submit_order' order.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="Submit Order"/>
             </form>
+            </br>
             <form action="{% url 'cancel_order' order.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" value="Cancel Order"/>
             </form>
+            </br>
         {% endfor %}
     </div>
     <div>
