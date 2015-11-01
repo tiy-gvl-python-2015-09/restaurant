@@ -221,7 +221,6 @@ class SubmitOrderView(View):
     def post(self, request, order_id):
         order = Order.objects.get(id=order_id)
         order.submitted = not order.submitted
-        order.comments = comments
         order.save()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
 
