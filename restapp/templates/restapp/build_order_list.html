@@ -60,12 +60,10 @@
                 </ul>
             {% endfor %}
             </br>
-            <div class="form-group">
-                <label for="comments">Order Comments</label>
-                <input type="text" class="form-control" id="comments" placeholder="Please provide special preparation instructions or allergies you have">
-            </div>
             <form action="{% url 'submit_order' order.id %}" method="post">
                 {% csrf_token %}
+                    <label for="comments">Order Comments</label>
+                    <input type="text" class="form-control" id="comments" name="comments" placeholder="Please provide special preparation instructions or allergies you have">
                 <input type="submit" value="Submit Order"/>
             </form>
             </br>
