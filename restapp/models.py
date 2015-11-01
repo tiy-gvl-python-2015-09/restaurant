@@ -85,13 +85,3 @@ class ItemCounter(models.Model):
     @property
     def item_cost(self):
         return self.item.price * self.count
-
-    @property
-    def total_cost(self):
-        all_prices = []
-        for item in self.order.items.all():
-            all_prices.append(item.price)
-        steve = []
-        for price in all_prices:
-            steve.append(price * self.count)
-        return sum(steve)
