@@ -4,19 +4,28 @@
 {% endblock %}
 
 {% block content %}
-    {% for item in object_list %}
-        <h3>{{ item.user }}</h3><br><br>
-            {% for order in item.items.all %}
-                <li><h3>{{ order }}</h3></li>
-                <li><h3>$ {{ order.price | floatformat:2 }}</h3></li><br><br>
-                    {% for itemcounter in order_list.itemcounter_set.all %}
-                        {% if itemcounter.order == order %}
-                            <h1>{{ itemcounter. }}</h1>
-                        {% endif %}
-                    {% endfor %}
-            {% endfor %}
-        <h3>Total cost:</h3>
+    {% for order in object_list %}
+        {% if order.submitted == True %}
+            {% if order.fulfilled == False %}
+                            <h3>{{ order.timestamp }}</h3><br><br>
+                            <h1>Allergies: {{ order.customer.profile.allergies }}</h1><br>
+                                {% for food in order.items.all %}
+                                    <h1><li>{{ food }}
+                                    {% for itemcounter in food.itemcounter_set.all %}
+                                        {% if itemcounter.order == order %}
+                                            {{ itemcounter.count }}<br>
+                                            $ {{ itemcounter.item_cost | floatformat:2 }}
+                                        {% endif %}
+                                    {% endfor %}
+                                    </li></h1><br><br>
+
+                                {% endfor %}
+                            <h1>Comments: {{ order.comments }}</h1><br><br>
+            {% endif %}
+        {% endif %}
+
+    {% endfor %}
+            <h3>Total cost:</h3>
         <h4>$ {{ item.order_cost | floatformat:2  }}</h4>
         <h4>{{ item.comments }}</h4><br><br>
-    {% endfor %}
 {% endblock %}

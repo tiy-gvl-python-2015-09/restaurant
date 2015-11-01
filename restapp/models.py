@@ -83,3 +83,8 @@ class ItemCounter(models.Model):
     item = models.ForeignKey(Item)
     order = models.ForeignKey(Order)
     count = models.IntegerField()
+
+    @property
+    def item_cost(self):
+        return self.item.price * self.count
+
