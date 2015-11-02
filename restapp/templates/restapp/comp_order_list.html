@@ -25,12 +25,11 @@
                                                     {% endfor %}
                                                 </p>
                                             {% endfor %}
-                                                {% if order.comments == True %}
+                                                {% if order.comments %}
                                                     <div><strong>Comments</strong><div>{{ order.comments }}</div>
                                                 {% else %}
                                                     <div><strong>Comments</strong><div>None</div>
                                                 {% endif %}
-
                                         <br><div><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong></div>
                                         </div>
                                             <div class="col-lg-7 col-md-5 col-sm-4">
