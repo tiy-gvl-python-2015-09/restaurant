@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block content %}
+<div style="font-size:30px" align="center"><strong>Pending Orders</strong></div><br>
     <div class="panel panel-default">
             {% for order in object_list %}
                 {% if order.submitted == True %}
                     {% if order.fulfilled == False %}
-                        <h3 class="panel-heading">
-                            Order on {{ order.timestamp }}</h3>
+                        <h4 class="panel-heading">
+                            Order on {{ order.timestamp }}</h4>
                         {% for food in order.items.all %}
                             <div class="panel-body">
                             {{ food }}:
@@ -20,9 +21,34 @@
                                     $ {{ itemcounter.item_cost | floatformat:2 }}
                                 {% endif %}
                             {% endfor %}
-                                <div><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong></div>
                             </div>
                         {% endfor %}
+                        <div><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong></div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+    </div>
+<br>
+    <div style="font-size:30px" align="center"><strong>Completed Orders</strong></div><br>
+
+    <div class="panel panel-default">
+            {% for order in object_list %}
+                {% if order.submitted == True %}
+                    {% if order.fulfilled == True %}
+                        <h4 class="panel-heading">
+                            Order on {{ order.timestamp }}</h4>
+                        {% for food in order.items.all %}
+                            <div class="panel-body">
+                            {{ food }}:
+                            {% for itemcounter in food.itemcounter_set.all %}
+                                {% if itemcounter.order == order %}
+                                    {{ itemcounter.count }}<br>
+                                    $ {{ itemcounter.item_cost | floatformat:2 }}
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <div><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong></div>
                     {% endif %}
                 {% endif %}
             {% endfor %}
