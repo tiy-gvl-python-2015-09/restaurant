@@ -20,7 +20,7 @@
      <!-- This is the restaurant name -->
                    {% if object.user_type == 'restaurant' %}
                        <div class="panel-primary">
-                           <a href="{% url 'menu_view' object.id %}">
+                           <a href="{% url 'build_order' object.id %}">
                                 <h3><u>{{ object.name }}</u></h3>
                            </a>
                        </div>
