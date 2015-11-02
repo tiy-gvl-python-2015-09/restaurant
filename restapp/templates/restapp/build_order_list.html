@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-        Menu |
 {% endblock %}
 
 {% block content %}
     <div class="col-sm-6">
-    <h1>Menu</h1>
 
     <div class="row">
         <div class="col-xs-12">
             <div class="panel panel-success">
-                <div class="panel-heading">
                     {% with object_list|first as first_object %}
-                    {{ first_object.owner.profile.name }}
-                    {% endwith %}'s Menu
-                </div>
+                            <h1>{{ first_object.owner.profile.name }}</h1>
+                            <h3>Menu</h3>
+                    {% endwith %}
                 <div class="panel-body">
                     <div class="panel panel-primary">
                         {% for object in object_list %}

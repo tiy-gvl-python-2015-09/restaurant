@@ -60,7 +60,7 @@
 <!-- CUSTOMER's view -->
     {% elif user.profile.user_type == 'customer' %}
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-8">
     <!-- This is the heading atop the page-->
                 <div class="panel panel-success">
                     {% with object_list|first as first_object %}
@@ -99,38 +99,35 @@
         </div>
 {% else %}
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-8">
+    <!-- This is the heading atop the page-->
                 <div class="panel panel-success">
-                    <div class="panel-heading">
-                        {% with object_list|first as first_object %}
-                        <h2>
-                            {{ first_object.owner.profile.name }} Menu
-                        </h2>
-                        {% endwith %}
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel panel-primary">
-                            {% for object in object_list %}
-                                {% if object.display == True %}
-                                 <div class="panel-heading">
-                                    <h4>
-                                        {{ object.item_name }}
-                                    </h4>
-                                 </div>
-                                </div>
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><h5>Description:  {{ object.description }}</h5></li>
-                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                    {% with object_list|first as first_object %}
+                            <h1>{{ first_object.owner.profile.name }}</h1>
+                            <h3>Menu</h3>
+                    {% endwith %}
+                </div>
+
+                <div class="panel-body">
+                    <div class="panel-primary">
+                        {% for object in object_list %}
+    <!-- This is the item name (e.g. "spaghetti")-->
+                             <h3>
+                                <ul class="pull-left">
+                                   {{ object.item_name }}
+                                </ul>
+                             </h3>
+    <!-- This is the item description and price-->
+                             <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">{{ object.description }}</li>
+                                </ul>
+                             </div>
+    <!-- ORDER button -->
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    {% endif %}
-
+{%  endif %}
 {% endblock %}
