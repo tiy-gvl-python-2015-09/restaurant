@@ -4,24 +4,28 @@
     {% for order in object_list %}
         {% if order.submitted == True %}
             {% if order.fulfilled == False %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><h2>Order ID: {{ order.id }} <br> {{ order.timestamp }}</h2></h3></div>
-                    <div class="panel-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="panel-body">
+                           <div class="panel panel-success">
+                                <h2>Order ID: {{ order.id }} <br> {{ order.timestamp }}</h2>
+                            </div>
                         <div class="col-lg-5 col-md-7 col-sm-8">
                             {% if order.customer.profile.allergies %}
                                 <h1>Allergies: {{ order.customer.profile.allergies }}</h1><br>
                                 {% else %}
                                 <h1>Allergies: None </h1><br>
                             {% endif %}
-                                {% for food in order.items.all %}
-                                    <h1>{{ food }}:
+                            <br>
+                            {% for food in order.items.all %}
+                                <h1>{{ food }} (
                                     {% for itemcounter in food.itemcounter_set.all %}
                                         {% if itemcounter.order == order %}
                                             {{ itemcounter.count }}
                                         {% endif %}
                                     {% endfor %}
-                                    </h1><br>
+                                    )
+                                </h1><br>
                                 {% endfor %}
                             {% if order.comments %}<br>
                                 <h3>Comments: {{ order.comments }}</h3>
