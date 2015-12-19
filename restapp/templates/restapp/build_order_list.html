@@ -4,44 +4,34 @@
 {% endblock %}
 
 {% block content %}
-  <div class="col-sm-6">
-    <div class="row">
-      <div class="col-xs-12">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-xs-12">
 <!-- This is the heading atop the page-->
-        <div class="panel panel-success">
-          {% with object_list|first as first_object %}
-            <h1>{{ first_object.owner.profile.name }}</h1>
-            <h3>Menu</h3>
-          {% endwith %}
-        </div>
+                {% with object_list|first as first_object %}
+                    <h1>{{ first_object.owner.profile.name }}</h1>
+                    <h3>Menu</h3>
+                {% endwith %}
+                <div class="panel panel-default">
+                    {% for object in object_list %}
+                        <div class="panel-heading clearfix"
 <!-- This is the item name (e.g. "spaghetti")-->
-        <div class="panel-body">
-          <div class="panel-primary">
-            {% for object in object_list %}
-              <h3>
-                <ul class="pull-left">
-                  {{ object.item_name }}
-                </ul>
+                            <h3 class="panel-title pull-left">{{ object.item_name }}</h3>
 <!-- ORDER button -->
-                <ul class="pull-right">
-                  <form action="{% url 'add_to_order' object.id %}" method="post">
-                                     {% csrf_token %}
-                    <input class="btn btn-primary" type="submit" value=${{ object.price| floatformat:2 }}>
-                  </form>
-                </ul>
-              </h3>
+                            <form action="{% url 'add_to_order' object.id %}" method="post">
+                                {% csrf_token %}
+                                <input class="btn-group pull-right" type="submit" value=${{ object.price| floatformat:2 }}>
+                            </form>
+                        </div>
 <!-- This is the item description and price -->
-              <div class="panel-body">
-                <ul class="list-group">
-                  <li class="list-group-item">{{ object.description }}</li>
-                </ul>
-              </div>
-            {% endfor %}
-          </div>
+                        <div class="panel-body">
+                            {{ object.description }}
+                        </div>
+                    {% endfor %}
+               </div>
+           </div>
         </div>
-      </div>
     </div>
-  </div>
 
 
     <div class="col-sm-6">

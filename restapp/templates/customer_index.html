@@ -6,81 +6,29 @@
 
 {% block content %}
   {% if request.user.id%}
-<!-- This is the heading atop the page-->
       <div class="container">
           <div class="row">
-              <div class="panel panel-success">
                  <h3><b>Restaurants in Your Area</b></h3>
-              </div>
           </div>
       </div>
-      <div class="container">
-         <div class="row">
-            <div class="panel-body">
-               <div class="panel-primary">
-                {% for object in object_list %}
-<!-- This is the restaurant name -->
-                   {% if object.user_type == 'restaurant' %}
-                       <div class="panel-primary">
-                           <a href="{% url 'build_order' object.id %}">
-                                <h3><u>{{ object.name }}</u></h3>
-                           </a>
-                       </div>
-     <!-- This is the restaurant description-->
-                       <div class="panel-body">
-                           <div class="list-group">
-                               <ul>
-                                   <p><b>Cuisine:</b> {{ object.get_cuisine_display }}</p>
-                               </ul>
-                               <ul>
-                                   <p><b>Address:</b> <br>{{ object.address }}</p>
-                               </ul>
-                               <ul>
-                                   <p><b>Phone number:</b> <br>{{ object.phone_num }}</p>
-                               </ul>
-                           </div>
-                       </div>
-                   {% endif %}
-                {% endfor %}
-            </div>
-        <div class="col-xs-6"></div>
+      <div class="panel panel-default">
+          {% for object in object_list %}
+              {% if object.user_type == 'restaurant' %}
+                  <div class="panel-heading">
+                      <a href="{% url 'build_order' object.id %}">
+                          <h3 class="panel-title"><u>{{ object.name }}</u></h3>
+                      </a>
+                  <div class="panel-body">
+                      <div class="list-group">
+                           <ul>
+                               <b>Cuisine:</b> {{ object.get_cuisine_display }}<br>
+                               {{ object.address }}<br>
+                               {{ object.phone_num }}
+                           </ul>
+                      </div>
+                  </div>
+              {% endif %}
+          {% endfor %}
       </div>
-    </div>
-  {% else %}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-success">
-                <h3><b>Restaurants in Your Area</b></h3>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="panel-body">
-            <div class="panel-primary">
-                {% for object in object_list %}
-     <!-- This is the restaurant name -->
-                   {% if object.user_type == 'restaurant' %}
-                       <div class="panel-primary">
-                           <a href="{% url 'menu_view' object.id %}">
-                                <h3><u>{{ object.name }}</u></h3>
-                           </a>
-                       </div>
-     <!-- This is the restaurant description-->
-                       <div class="panel-body">
-                           <div class="list-group">
-                               <ul>
-                                   <p><b>Cuisine:</b> {{ object.get_cuisine_display }}</p>
-                               </ul>
-                               <ul>
-                                   <p><b>Address:</b> <br>{{ object.address }}</p>
-                               </ul>
-                           </div>
-                       </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        <div class="col-xs-6"></div>
-    </div>
-    </div>
-    {% endif %}
+  {% endif %}
 {% endblock %}
