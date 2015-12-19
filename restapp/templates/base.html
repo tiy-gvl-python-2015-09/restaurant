@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <br>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar">
       <div class="container-fluid">
 
         <div class="navbar-header">
@@ -36,7 +36,7 @@
                 {% endif %}
             {% endif %}
           </ul>
-            <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
                 {% if request.user.id %}
                     {% if request.user.profile.user_type == 'restaurant'  %}
                         <li class="dropdown">
@@ -47,17 +47,16 @@
                               <li><a href="{% url 'undisp_menu_view' user.id %}">86ed Items</a></li>
                             </ul>
                         </li>
-                {% elif request.user.profile.user_type == 'customer' %}
+                    {% elif request.user.profile.user_type == 'customer' %}
                         <li><a href="{% url 'customer_order_view' user.id %}">Your Orders</a></li>
-
+                    {% endif %}
                 {% endif %}
-            {% endif %}
             {% if request.user.id %}
                      <li><a href="{% url 'logout' %}?next=/">Logout</a></li>
-                  {% else %}
+            {% else %}
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <li><a href="{% url 'create_user' %}">Create User</a></li>
-                  {% endif %}
+            {% endif %}
           </ul>
         </div>
       </div>
