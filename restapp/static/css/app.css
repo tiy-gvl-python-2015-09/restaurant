@@ -41,22 +41,22 @@
 }
 
 .jumbotron {
-    background-image: url("http://recipethat.com/blogs/wp-content/uploads/2012/07/blog_im-11.png");
-    background-size: 100%;
+    background-image: url("http://blog.madhungry.com/files/2011/10/shrimp-pad-thai-mhlb2048.jpg");
+    background-repeat: "no-repeat";
     border-radius: 0;
     padding-left: 5%;
     padding-bottom: 50px;
     margin-bottom: 50px;
     margin-top: 0;
-    height: 350px;
-    color: midnightblue;
+    height: 450px;
+    color: lightyellow;
 }
 
 .jumbotron h1 {
     font-family: 'Shift', sans-serif;
     font-weight: bold;
     margin-top: 0;
-    color: indigo;
+    color: lightyellow;
 }
 
 .jumbotron p {
