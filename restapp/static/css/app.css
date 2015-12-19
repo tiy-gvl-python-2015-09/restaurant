@@ -8,38 +8,6 @@
     font-weight: bolder;
 }
 
-.button {margin:auto;
-  display:block;
-}
-
-.btn {
-    width: 150px;
-}
-
-.btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
-}
-
-.btn-primary {
-    background: #e38d13;
-    color: #ffffff;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #33a6cc;
-}
-
-.btn-primary:active, .btn-primary.active {
-    background: #007299;
-    box-shadow: none;
-}
-
-.super-big-button {
-    width: 100%;
-    font-size: 2.5em;
-    line-height: 10;
-}
-
 .jumbotron {
     background-image: url("http://blog.madhungry.com/files/2011/10/shrimp-pad-thai-mhlb2048.jpg");
     background-repeat: "no-repeat";
