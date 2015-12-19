@@ -1,3 +1,5 @@
+<!-- Is this template used anywhere???-->
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -8,20 +10,21 @@
     {% for order in object_list %}
         {% if order.submitted == True %}
             {% if order.fulfilled == True %}
-                            <h3>{{ order.timestamp }}</h3><br><br>
-                            <h3>Allergies: {{ order.customer.profile.allergies }}</h3><br>
-                                {% for food in order.items.all %}
-                                    <h1><li>{{ food }}
-                                    {% for itemcounter in food.itemcounter_set.all %}
-                                        {% if itemcounter.order == order %}
-                                            {{ itemcounter.count }}<br>
-                                            $ {{ itemcounter.item_cost | floatformat:2 }}
-                                        {% endif %}
-                                    {% endfor %}
-                                    </li></h1><br><br>
-                                {% endfor %}
-                            <h1>Comments: {{ order.comments }}</h1>
-                <br><h1>Total Cost: ${{ order.total_cost|floatformat:2 }}</h1><br>
+                <h3>{{ order.timestamp }}</h3><br><br>
+                <h3>Allergies: {{ order.customer.profile.allergies }}</h3><br>
+                    {% for food in order.items.all %}
+                        <h1><li>{{ food }}
+                        {% for itemcounter in food.itemcounter_set.all %}
+                            {% if itemcounter.order == order %}
+                                {{ itemcounter.count }}<br>
+                                $ {{ itemcounter.item_cost | floatformat:2 }}
+                            {% endif %}
+                        {% endfor %}
+                        </li></h1><br><br>
+                    {% endfor %}
+                <h1>Comments: {{ order.comments }}</h1>
+                <br>
+                <h1>Total Cost: ${{ order.total_cost|floatformat:2 }}</h1><br>
             {% endif %}
         {% endif %}
     {% endfor %}

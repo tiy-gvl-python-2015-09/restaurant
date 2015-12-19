@@ -8,7 +8,7 @@
     font-weight: bolder;
 }
 
-button {margin:auto;
+.button {margin:auto;
   display:block;
 }
 
@@ -41,30 +41,37 @@ button {margin:auto;
 }
 
 .jumbotron {
-    background-image: url("http://blog.madhungry.com/files/2011/10/shrimp-pad-thai-mhlb2048.jpg");
-    background-repeat: "no-repeat";
-    border-radius: 0%;
+    background-image: url("http://recipethat.com/blogs/wp-content/uploads/2012/07/blog_im-11.png");
+    background-size: 100%;
+    border-radius: 0;
     padding-left: 5%;
     padding-bottom: 50px;
     margin-bottom: 50px;
-    margin-top: 0%;
-    height: 400px;
+    margin-top: 0;
+    height: 350px;
     color: midnightblue;
 }
 
 .jumbotron h1 {
     font-family: 'Shift', sans-serif;
     font-weight: bold;
+    margin-top: 0;
+    color: indigo;
 }
 
 .jumbotron p {
     font-style: italic;
+    font-weight: bold;
 }
 
 .navbar {
-    margin-bottom: 0%;
-    border-radius: 0%;
-    border-width: 0%;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-width: 0;
     background-color: #122b40;
 }
 
+.panel-primary {
+    margin: 0;
+    border-radius: 0;
+}

@@ -5,30 +5,31 @@
 {% endblock %}
 
 {% block content %}
-  {% if request.user.id%}
-      <div class="container">
-          <div class="row">
+      <div class="panel panel-primary">
+          <div class="panel-heading">
                  <h3><b>Restaurants in Your Area</b></h3>
           </div>
       </div>
-      <div class="panel panel-default">
+
+      <div class="panel panel-info">
           {% for object in object_list %}
               {% if object.user_type == 'restaurant' %}
                   <div class="panel-heading">
                       <a href="{% url 'build_order' object.id %}">
-                          <h3 class="panel-title"><u>{{ object.name }}</u></h3>
+                          <div class="panel-title"><h4>{{ object.name }}</h4></div>
                       </a>
+                  </div>
                   <div class="panel-body">
-                      <div class="list-group">
-                           <ul>
-                               <b>Cuisine:</b> {{ object.get_cuisine_display }}<br>
-                               {{ object.address }}<br>
-                               {{ object.phone_num }}
-                           </ul>
+                      <div class="col-sm-6">
+                           <b>Cuisine:</b> {{ object.get_cuisine_display }}<br>
+                      </div>
+                      <div class="col-sm-6">
+                           {{ object.address }}<br>
+                           {{ object.phone_num }}
                       </div>
                   </div>
               {% endif %}
           {% endfor %}
       </div>
-  {% endif %}
+
 {% endblock %}

@@ -1,138 +1,37 @@
+<!-- This is the RESTAURANT-facing view of a restaurant's own MENU -->
+
 {% extends 'base.html' %}
 
 {% block title %}
-
-        {% with object_list|first as first_object %}
-            {% if user.profile.user_type == 'restaurant' %}
+    {% if user.profile.user_type == 'restaurant' %}
             My Menu | {{ first_object.owner.profile.name }}
-
-        {% else %}
-
-            Menu | {{ first_object.owner.profile.name }}
     {% endif %}
-    {% endwith %}
 {% endblock %}
 
 {% block content %}
-<!-- restaurant owner's view -->
-    {% if user.profile.user_type == 'restaurant' %}
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        {% with object_list|first as first_object %}
-                        <h2>
-                            {{ first_object.owner.profile.name }} Menu
-                        </h2>
-                        {% endwith %}
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel panel-primary">
-                            {% for object in object_list %}
-                                {% if object.display == True %}
-                                 <div class="panel-heading">
-                                    <h4>
-                                        {{ object.item_name }}
-                                    </h4>
-                                    <button class="button-default">
-                                        <a href="{% url 'item_update' object.id %}">
-                                            Update This Item
-                                        </a>
-                                    </button>
-                                     <form action="{% url 'undisplay_view' object.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="86" class="btn-lg btn-danger"/>
-                                    </form>
-                                </div>
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><h5>Description:  {{ object.description }}</h5></li>
-                                        <li><h5>Price:  ${{ object.price| floatformat:2 }}</h5></li>
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
+    {% with object_list|first as first_object %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1>Your Menu</h1>
+                <h4>{{ first_object.owner.profile.name }}</h4>
             </div>
         </div>
-<!-- CUSTOMER's view
-    {% elif user.profile.user_type == 'customer' %}
-        <div class="row">
-            <div class="col-xs-8">
-    <!-- This is the heading atop the page
-                <div class="panel panel-success">
-                    {% with object_list|first as first_object %}
-                            <h1>{{ first_object.owner.profile.name }}</h1>
-                            <h3>Menu</h3>
-                    {% endwith %}
-                </div>
-
-                <div class="panel-body">
-                    <div class="panel-primary">
-                        {% for object in object_list %}
-    <!-- This is the item name (e.g. "spaghetti")
-                             <h3>
-                             <ul class="pull-left">
-                                {{ object.item_name }}
-                             </ul>
-                             <ul class="pull-right">
-                                <button class="btn btn-primary" type="button">
-                                    <span class="badge" align="right">${{ object.price| floatformat:2 }}
-                                    </span>
-                                    Add to order
-                                </button>
-                             </ul>
-                             </h3>
-    <!-- This is the item description and price
-                             <div class="panel-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item">{{ object.description }}</li>
-                                </ul>
-                             </div>
-    <!-- ORDER button
-                        {% endfor %}
-                    </div>
+    {% endwith %}
+    <div class="panel panel-info">
+        {% for object in object_list %}
+            <div class="panel-heading clearfix">
+                <h1 class="panel-title pull-left">{{ object.item_name }}</h1>
+                <div class="btn-group pull-right">
+                    <a href="{% url 'item_update' object.id %}" class="btn btn-default btn-sm">Update</a>
+                    <form action="{% url 'undisplay_view' object.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Remove" class="btn btn-default btn-sm"/>
+                    </form>
                 </div>
             </div>
-        </div>
--->
-    {% else %}
-        <div class="row">
-            <div class="col-xs-8">
-    <!-- This is the heading atop the page-->
-                <div class="panel panel-success">
-                    {% with object_list|first as first_object %}
-                            <h1>{{ first_object.owner.profile.name }}</h1>
-                            <h3>Menu</h3>
-                    {% endwith %}
-                </div>
-
-                <div class="panel-body">
-                    <div class="panel-primary">
-                        {% for object in object_list %}
-    <!-- This is the item name (e.g. "spaghetti")-->
-                             <h3>
-                                <ul class="pull-left">
-                                   {{ object.item_name }}
-                                </ul>
-                             </h3>
-    <!-- This is the item description and price-->
-                            <ul class="pull-right">
-                                    <span class="badge" align="right">${{ object.price| floatformat:2 }}
-                                    </span>
-                             </ul>
-                             <div class="panel-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item">{{ object.description }}</li>
-                                </ul>
-                             </div>
-    <!-- ORDER button -->
-                        {% endfor %}
-                    </div>
-                </div>
+            <div class="panel-body">
+                {{ object.description }}
             </div>
-        </div>
-{%  endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

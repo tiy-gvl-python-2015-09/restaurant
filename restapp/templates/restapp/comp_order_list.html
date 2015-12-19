@@ -1,41 +1,56 @@
+<!-- This is the RESTAURANT-facing view of
+     completed orders -->
 {% extends 'base.html' %}
 
+{% block title %}
+    Fulfilled Orders
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-              <div class="panel-body">
-                    {% for order in object_list %}
-                        {% if order.submitted == True %}
-                            {% if order.fulfilled == True %}
-                                <div class="panel panel-success">
-                                        <h3><p>Order ID: {{ order.id }}</p></h3></div>
-                                    <div class="panel-body">
-                                        <div><strong>Time Completed</strong><p>{{ order.timestamp }}</p>
-                                        <p><strong>Customer Name</strong><br> {{ order.customer.profile.name }} </p>
-                                        <p><strong>Phone Number</strong><br>{{ order.customer.profile.phone_num }}</p>
-                                        <div><strong>Items:</strong><br>
-                                            {% for food in order.items.all %}
-                                                 {{ food }}:
-                                                    {% for itemcounter in food.itemcounter_set.all %}
-                                                        {% if itemcounter.order == order %}
-                                                            {{ itemcounter.count }}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endfor %}
-                                                {% if order.comments %}
-                                                    <div><strong>Comments</strong><div>{{ order.comments }}</div>
-                                                {% else %}
-                                                    <div><strong>Comments</strong><div>None</div>
-                                                {% endif %}
-                                        <br><div><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong></div>
-                                        </div>
-                                            <div class="col-lg-7 col-md-5 col-sm-4">
-                                             </div>
-                                        </div>
-                                </div>
-                            {% endif %}
+    <div class="panel panel-info">
+        {% for order in object_list %}
+            {% if order.fulfilled == True %}
+                <div class="panel-heading">
+                    <h3 class="panel-title">Order ID: {{ order.id }}</h3>
+                </div>
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <td><strong>Time Completed</strong></td>
+                            <td>{{ order.timestamp }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer Name</strong></td>
+                            <td>{{ order.customer.profile.name }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone Number</strong></td>
+                            <td>{{ order.customer.profile.phone_num }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Items</strong></td>
+                            <td>{% for food in order.items.all %}
+                                {{ food }}:
+                                    {% for itemcounter in food.itemcounter_set.all %}
+                                        {% if itemcounter.order == order %}
+                                            {{ itemcounter.count }}
+                                        {% endif %}
+                                    {% endfor %}
+                                <br>
+                            {% endfor %}</td>
+                        </tr>
+                        {% if order.comments %}
+                        <tr>
+                            <td><strong>Comments</strong></td>
+                            <td>{{ order.comments }}</td>
+                        </tr>
                         {% endif %}
-                    {% endfor %}
+                        <tr>
+                            <td><strong>Total: ${{ order.total_cost|floatformat:2 }}</strong><br></td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
