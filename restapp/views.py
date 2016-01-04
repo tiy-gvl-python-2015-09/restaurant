@@ -241,7 +241,7 @@ class SubmitOrderView(View):
 
 class CancelOrderView(View):
 
-    def post(self,request, order_id):
+    def post(self, request, order_id):
         order = Order.objects.get(id=order_id)
         order.delete()
         return HttpResponseRedirect(reverse("customer_order_view", kwargs={"pk": request.user.id}))
